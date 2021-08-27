@@ -5,9 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap" rel="stylesheet"> 
     <script defer src=./main.js></script>
 </head>
 <body>
-    <div id="content"></div>
+    <div id="header"></div>
+    <div id="content">
+        <div id="sidebar"></div>
+        <div class="notepad">
+            <div class="top">Todo List</div>
+            <div class="paper" contenteditable="true">
+                <div id="margin"></div>
+                <div id="writing-area">
+                    <div class="project">
+                        <div class="project-name">
+                            <h2 class="notepad-text">Project 1</h2>
+                            <h3 class='due-date'>Due Date</h3>
+                        </div>
+                        <p class="notepad-text todos completed">- Do something</p>
+                        <p class="notepad-text todos">- Do something else</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
