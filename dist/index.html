@@ -12,9 +12,28 @@
     <script defer src=./main.js></script>
 </head>
 <body>
-    <div id="header"></div>
+    <div id="header">
+        <h1>On Task</h1>
+    </div>
     <div id="content">
-        <div id="sidebar"></div>
+        <div id="sidebar">
+            <nav>
+                <ul id="">
+                    <li>Home</li>
+                    <li>Today</li>
+                    <li>This Week</li>
+                    <hr class="line-break"><hr class="line-break">
+                    <li id='projects'>
+                        Projects:
+                        <ul id="project-list">
+                            <li>Project 1</li>
+                            <li>Project 2</li>
+                            <li id="add-project">Add Project</li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
         <div class="notepad">
             <div class="top">Todo List</div>
             <div class="paper" contenteditable="true">
@@ -23,7 +42,7 @@
                     <div class="project">
                         <div class="project-name">
                             <h2 class="notepad-text">Project 1</h2>
-                            <h3 class='due-date'>Due Date</h3>
+                            <h3 class='notepad-text'>Due Date</h3>
                         </div>
                         <p class="notepad-text todos completed">- Do something</p>
                         <p class="notepad-text todos">- Do something else</p>

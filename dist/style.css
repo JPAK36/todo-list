@@ -1,7 +1,9 @@
 body {
-    background: #000;
+    background: black;
     width: 100%;
     overflow: hidden;
+    margin: 0;
+    padding: 0;
 }
 
 #content {
@@ -9,16 +11,26 @@ body {
 }
 
 #header {
-    border: 1px red solid;
+    background: #494738;
+    border-bottom: 5px solid black;
     width: 100vw;
-    height: 300px;
+    height: 150px;
+    display: flex;
+    align-items: flex-end;
+}
 
+#header > h1 {
+    color: beige;
+    font-size: 64px;
+    text-shadow: 3px 3px 8px #881919;;
+    margin: 0 10px;
 }
 
 #sidebar {
     height: 100vh;
-    width: 500px;
-    border: 1px yellow solid;
+    width: 450px;
+    background: #f7f2cb; 
+    border-right: 1px solid black;
 }
 
 .notepad {
@@ -33,6 +45,7 @@ body {
 .top {
     height: 80px;
     background: rgb(136, 25, 25);
+    border-bottom: 3px solid black;
     border-radius: 5px 5px 0 0;
     color: white;
     text-align: center;
@@ -88,8 +101,32 @@ h2 {
 .project-name {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    margin-top: 5px;
+    align-items: center;
+    margin-top: 8px;
     margin-right: 10%;
     height: 43px;
+}
+
+ul {
+    list-style-type: none;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+li {
+    margin: 30px 50px;
+}
+
+hr {
+    position: relative;
+    top: 20px;
+}
+
+#projects {
+    margin-top: 50px;
+    font-size: 32px;
+}
+
+#project-list {
+    font-size: 20px;
 }
