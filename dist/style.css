@@ -31,6 +31,46 @@ body {
     width: 450px;
     background: #f7f2cb; 
     border-right: 1px solid black;
+    font-family: "Gochi Hand";
+    font-size: 36px;
+}
+
+ul {
+    list-style-type: none;
+    font-weight: bold;
+    padding: 0;
+}
+
+li {
+    margin: 30px 50px;
+    text-align: left;
+    padding: 0 20px;
+
+}
+
+#project-list {
+    font-size: 26px;
+}
+
+hr {
+    position: relative;
+}
+
+#projects {
+    margin: 50px 50px;
+    font-size: 36px;
+}
+
+#nav-btns > li:hover, #project-list > li:hover, li:hover > .remove-project {
+    cursor: pointer;
+    background: #e6e1ba;
+    border-radius: 5px;
+    visibility: visible;
+}
+
+.remove-project {
+    visibility: hidden;
+    float: right;
 }
 
 .notepad {
@@ -105,28 +145,4 @@ h2 {
     margin-top: 8px;
     margin-right: 10%;
     height: 43px;
-}
-
-ul {
-    list-style-type: none;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-li {
-    margin: 30px 50px;
-}
-
-hr {
-    position: relative;
-    top: 20px;
-}
-
-#projects {
-    margin-top: 50px;
-    font-size: 32px;
-}
-
-#project-list {
-    font-size: 20px;
 }
