@@ -99,6 +99,9 @@ hr {
     display: flex;
 }
 
+.active {
+    background: #e6e1ba;
+}
 
 .notepad {
     min-width: 600px;
