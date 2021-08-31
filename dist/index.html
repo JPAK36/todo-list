@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap" rel="stylesheet"> 
+    <script src="https://use.fontawesome.com/4853b2399b.js"
     <script defer src=./main.js></script>
 </head>
 <body>
@@ -26,10 +27,28 @@
                 <hr class="line-break"><hr class="line-break">
                 <div id='projects'>
                     Projects:
-                    <ul id="project-list">
-                        <li>Project 1 <span class='remove-project'>&times;</span></li>
-                        <li>Project 2 <span class='remove-project'>&times;</span></li>
-                        <li id="add-project">Add Project</li>
+                    <ul class="project-list">
+                        <li>
+                            <span class="project-name">Project 1</span>
+                            <span class="icons">
+                                <img class="edit-icon" src="./images/edit-icon.svg">
+                                <img class="delete-icon" src="./images/delete-icon.svg">
+                            </span>
+                        </li>
+                        <li>
+                            <span class="project-name">Project 2</span>
+                            <span class="icons">
+                                <img class="edit-icon" src="./images/edit-icon.svg">
+                                <img class="delete-icon" src="./images/delete-icon.svg">
+                            </span>
+                        </li>
+
+                        <li>
+                            <span id="add-project">
+                                <svg class="add-icon" baseProfile="tiny" id="Layer_1" version="1.2" viewBox="0 0 24 24" width="24px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M18,10h-4V6c0-1.104-0.896-2-2-2s-2,0.896-2,2l0.071,4H6c-1.104,0-2,0.896-2,2s0.896,2,2,2l4.071-0.071L10,18  c0,1.104,0.896,2,2,2s2-0.896,2-2v-4.071L18,14c1.104,0,2-0.896,2-2S19.104,10,18,10z"/></svg>
+                                <span>Add Project</span>
+                            </span>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -40,7 +59,7 @@
                 <div id="margin"></div>
                 <div id="writing-area">
                     <div class="project">
-                        <div class="project-name">
+                        <div class="project-div">
                             <h2 class="notepad-text">Project 1</h2>
                             <h3 class='notepad-text'>Due Date</h3>
                         </div>

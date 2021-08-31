@@ -1,7 +1,6 @@
 body {
     background: black;
     width: 100%;
-    overflow: hidden;
     margin: 0;
     padding: 0;
 }
@@ -27,12 +26,11 @@ body {
 }
 
 #sidebar {
-    height: 100vh;
     width: 450px;
     background: #f7f2cb; 
     border-right: 1px solid black;
     font-family: "Gochi Hand";
-    font-size: 36px;
+    font-size: 50px;
 }
 
 ul {
@@ -42,14 +40,35 @@ ul {
 }
 
 li {
-    margin: 30px 50px;
+    margin: 30px;
     text-align: left;
-    padding: 0 20px;
+    padding: 0 12px;
 
 }
 
-#project-list {
-    font-size: 26px;
+.project-list {
+    font-size: 36px;
+}
+
+.edit-icon, .delete-icon {
+    width: 24px;
+    margin-left: 10px;
+}
+
+.add-icon {
+    width: 28px;
+    margin-right: 12px;
+    fill: #808080;
+}
+
+#add-project {
+    display: flex;
+    color: #808080;
+}
+
+#add-project:hover, #add-project:hover > .add-icon{
+    color: black;
+    fill: black;
 }
 
 hr {
@@ -58,25 +77,32 @@ hr {
 
 #projects {
     margin: 50px 50px;
-    font-size: 36px;
+    font-size: 50px;
 }
 
-#nav-btns > li:hover, #project-list > li:hover, li:hover > .remove-project {
+#nav-btns > li:hover, .project-list > li:hover, li:hover > .icons {
     cursor: pointer;
     background: #e6e1ba;
     border-radius: 5px;
     visibility: visible;
 }
 
-.remove-project {
-    visibility: hidden;
-    float: right;
+.project-list > li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 75%;
 }
+
+.icons {
+    visibility: hidden;
+    display: flex;
+}
+
 
 .notepad {
     min-width: 600px;
     border-radius: 0 0 10px 10px;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -100,7 +126,7 @@ hr {
 .paper {
     height: 100vh;
     background: repeating-linear-gradient(#f0ec6a, #f6f9b8 41px, #c4c5aa 41px, #91b0c7 42px);
-    line-height: 43px;
+    line-height: 42px;
     outline: 0;
     font-family: "Gochi Hand";
     word-spacing: 10px;
@@ -127,6 +153,7 @@ h2 {
     margin-top: 0;
     margin-bottom: 0;
 }
+
 .todos {
     text-indent: 5%;
     font-size: 24px;
@@ -138,7 +165,7 @@ h2 {
     text-decoration-thickness: 2px;
 }
 
-.project-name {
+.project-div {
     display: flex;
     justify-content: space-between;
     align-items: center;
