@@ -51,6 +51,7 @@ body {
 
 .edit-icon, .delete-icon {
     width: 24px;
+    height: 24px;
     margin-left: 10px;
 }
 
@@ -96,6 +97,19 @@ hr {
 .icons {
     visibility: hidden;
     display: flex;
+    height: 24px;
+    margin-left: 10px;
+}
+
+.task-item > .icons {
+    position: relative;
+    top: 8px;
+}
+
+.task-item:hover, .task-item:hover > .icons {
+    cursor: pointer;
+    visibility: visible;
+    transform: scale(1.1);
 }
 
 .active {
@@ -160,10 +174,10 @@ h3 {
 }
 
 .todos {
-    text-indent: 8%;
     font-size: 24px;
     list-style-type: none;
     padding: 0;
+    margin-left: 3%;
 }
 
 .completed {
@@ -171,6 +185,10 @@ h3 {
     text-decoration-color: #808080;
     text-decoration-thickness: 2px;
     color: #808080
+}
+
+.completed > .icons {
+    fill: #808080;
 }
 
 .project-div {
@@ -182,13 +200,13 @@ h3 {
     height: 43px;
 }
 
-.task {    
+.task {
     display: flex;
-    justify-content: space-between;
 }
 
 .task-item {
     width: 100%;
+    display: flex;
 }
 
 .priority-icon {
@@ -196,6 +214,7 @@ h3 {
     height: 24px;
     position: relative;
     top: 8px;
+    margin-right: 20px;
     fill: hsl(120, 100%, 40%);
 }
 
@@ -219,11 +238,13 @@ h3 {
 }
 
 .due-date {
-    width: 100%;
+    width: 30%;
     display: flex;
     justify-content: flex-end;
     margin-right: 4%;
+    margin-left: 8%;
 }
+
 .skip-line {
     height: 42px;
 }
