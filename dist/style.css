@@ -1,18 +1,17 @@
 body {
     background: black;
-    width: 100%;
     margin: 0;
     padding: 0;
 }
 
 #content {
     display: flex;
+    overflow: auto;
 }
 
 #header {
     background: #494738;
     border-bottom: 5px solid black;
-    width: 100vw;
     height: 150px;
     display: flex;
     align-items: flex-end;
@@ -118,17 +117,16 @@ hr {
 
 .notepad {
     min-width: 600px;
-    border-radius: 0 0 10px 10px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    overflow: auto;
 }
 
 .top {
     height: 80px;
     background: rgb(136, 25, 25);
     border-bottom: 3px solid black;
-    border-radius: 5px 5px 0 0;
     color: white;
     text-align: center;
     font-size: 36px;
@@ -140,13 +138,13 @@ hr {
 }
 
 .paper {
-    height: 100vh;
     background: repeating-linear-gradient(#f0ec6a, #f6f9b8 41px, #c4c5aa 41px, #91b0c7 42px);
     line-height: 42px;
     outline: 0;
     font-family: "Gochi Hand";
     word-spacing: 10px;
     display: flex;
+    overflow: auto;
 }
 
 h2 {
