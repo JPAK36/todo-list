@@ -106,7 +106,7 @@ hr {
     top: 8px;
 }
 
-.task-item:hover, .task-item:hover > .icons {
+.task-item:hover, .task-item:hover > .icons, .add-task:hover {
     cursor: pointer;
     visibility: visible;
     transform: scale(1.1);
@@ -247,4 +247,20 @@ h3 {
 
 .skip-line {
     height: 42px;
+}
+
+.add-task {
+    display: flex;
+    width: 100%;
+    color: #808080;
+    margin-left: 4%;
+}
+
+.add-task:hover, .add-task:hover > .add-icon {
+    color: black;
+    fill: black;
+}
+
+.add-task > .add-icon {
+    width: 24px;
 }
