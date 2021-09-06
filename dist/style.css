@@ -51,6 +51,7 @@ body {
     border-right: 1px solid black;
     font-family: "Gochi Hand";
     font-size: 50px;
+    display:none;
 }
 
 #sidebar-nav > ul {
@@ -289,4 +290,58 @@ h3 {
 
 .add-task > .add-icon {
     width: 24px;
+}
+
+@media screen and (max-width: 1024px) {
+    #sidebar {
+        min-width: 100vw;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    #nav-btns, #projects {
+        font-size: 0.9em;
+    }
+
+    .project-list {
+        width: 95%;
+        padding: 8px;
+        margin-top: 0;
+    }
+    .project-list > li {
+        margin: 15px;
+        margin-right: 45px;
+        width: 90%;
+    }
+
+    .notepad {
+        min-width: 350px;
+    }
+
+    .priority-icon, .calendar-icon {
+        display: none;
+    }
+
+    .due-date {
+        margin-right: 0;
+        margin-left: 8%;
+        font-size: 20px;
+    }
+
+    h3 {
+        font-size: 20px;
+        width: 102.6px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+
+    .task-item {
+        font-size: 20px;
+    }
+
+    #margin {
+        display: none;
+    }
 }
