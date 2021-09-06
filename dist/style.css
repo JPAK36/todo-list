@@ -108,7 +108,7 @@ hr {
 .task-item:hover, .task-item:hover > .icons, .add-task:hover {
     cursor: pointer;
     visibility: visible;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .active {
