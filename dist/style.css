@@ -24,7 +24,28 @@ body {
     margin: 0 10px;
 }
 
+#bars-icon {
+    fill: white;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: 15px;
+    top: 9.5px;
+}
+
+#close-sidebar {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 40px;
+}
+
+#bars-icon:hover, #close-sidebar:hover {
+    cursor: pointer;
+}
+
 #sidebar {
+    position: relative;
     width: 450px;
     background: #f7f2cb; 
     border-right: 1px solid black;
@@ -40,6 +61,7 @@ body {
 
 #nav-btns > li, .project-list >li {
     margin: 30px;
+    margin-right: 65px;
     text-align: left;
     padding: 0 12px;
 }
@@ -117,6 +139,7 @@ hr {
 
 .notepad {
     min-width: 600px;
+    position: relative;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -145,6 +168,7 @@ hr {
     word-spacing: 10px;
     display: flex;
     overflow: auto;
+    overflow-x: hidden;
 }
 
 h2 {
@@ -254,7 +278,6 @@ h3 {
 
 .add-task {
     display: flex;
-    width: 100%;
     color: #808080;
     margin-left: 4%;
 }
