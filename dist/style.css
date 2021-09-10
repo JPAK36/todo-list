@@ -217,6 +217,7 @@ h3 {
 
 .completed > .due-date > svg {
     fill: #808080;
+    cursor: default;
 }
 
 .project-div {
