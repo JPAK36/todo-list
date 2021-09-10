@@ -33,14 +33,11 @@ body {
     top: 9.5px;
 }
 
-#close-sidebar {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 40px;
+.toggle-sidebar {
+    display: none;
 }
 
-#bars-icon:hover, #close-sidebar:hover {
+#bars-icon:hover {
     cursor: pointer;
 }
 
