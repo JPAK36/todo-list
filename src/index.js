@@ -1,11 +1,20 @@
 // Sidebar Module
-const sidebar = ( () => {
+const sidebarController = (() => {
+
+    const mobileToggleBtn = document.getElementById('bars-icon-mobile');
+    if (screen.width <= 1024 && mobileToggleBtn.classList.contains('hidden')) {
+        mobileToggleBtn.classList.toggle('hidden');
+    }
+
+    const sidebar = document.getElementById('sidebar');
     
     const toggleSidebar = () => {
-        const sidebar = document.getElementById('sidebar');
         sidebar.classList.toggle('toggle-sidebar');
+        if (screen.width <= 1024) mobileToggleBtn.classList.toggle('hidden');
     }
     
-    const toggleBtn = document.getElementById('bars-icon');
-    toggleBtn.addEventListener('click', toggleSidebar);
+    const toggleBtn = document.querySelectorAll('.bars-icon');
+    toggleBtn.forEach(button => {
+        button.addEventListener('click', toggleSidebar);
+    });    
 })();
