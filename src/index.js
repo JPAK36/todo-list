@@ -1,3 +1,5 @@
+import addProject from "./projects";
+
 // Sidebar Module
 const sidebarController = (() => {
 
@@ -17,4 +19,7 @@ const sidebarController = (() => {
     toggleBtn.forEach(button => {
         button.addEventListener('click', toggleSidebar);
     });    
+
+    const addProjectBtn = document.querySelector('#add-project');
+    addProjectBtn.addEventListener('click', addProject);
 })();
