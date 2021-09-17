@@ -57,14 +57,17 @@ body {
     padding: 0;
 }
 
-#nav-btns > li, .project-list >li {
-    margin: 30px;
+#nav-btns > li, .project-list > li {
+    margin: 20px;
     text-align: left;
-    padding: 0 12px;
+    padding: 12px;
 }
 
 .project-list {
     font-size: 36px;
+    word-break: break-all;
+    padding-left: 10px;
+    margin: 0;
 }
 
 .edit-icon, .delete-icon {
@@ -94,7 +97,7 @@ hr {
 }
 
 #projects {
-    margin: 50px 50px;
+    margin: 50px 30px;
     font-size: 50px;
 }
 
@@ -109,7 +112,7 @@ hr {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 75%;
+    width: 90%;
 }
 
 .icons {
@@ -335,9 +338,9 @@ h3 {
         padding: 8px;
         margin-top: 0;
     }
+
     .project-list > li {
-        margin: 15px;
-        margin-right: 45px;
+        margin-right: 15px;
         width: 90%;
     }
 
