@@ -70,7 +70,7 @@ body {
     margin: 0;
 }
 
-li > input {
+#user-input {
 	border: 1px solid black;
 	border-radius: 5px;
 	background: white;
@@ -79,6 +79,7 @@ li > input {
     padding: 4px 8px;
     font-family: "Gochi Hand";
     font-size: 36px;
+    box-sizing: border-box;
 }
 
 .edit-icon, .delete-icon {

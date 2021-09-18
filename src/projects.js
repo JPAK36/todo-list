@@ -20,32 +20,33 @@ const createElements = () => {
         return img;
     }
     
+    const createForm = () => {
+        const inputForm = document.createElement('form');
+        return inputForm;
+    }
+
     const createInputField = () => {
         const userInput = document.createElement('input');
         userInput.setAttribute('type', 'text');
         userInput.setAttribute('placeholder', 'Project name...');
         userInput.setAttribute('id', 'user-input');
+        userInput.required = true;
+
         return userInput;
     }
 
-    return {createListElement, createSpanElement, createImageElement, createInputField}
+    return {createListElement, createSpanElement, createImageElement, createInputField, createForm}
 }
 
-// Add Project Factory Function
-const addProject = () => {
-    /* TODO: use awaitingInput variable to prevent add project button 
-    being pressed multiple times. Consider cleaning the code up a bit
-    by moving DOM related items to separate module
-
-    */
-    let awaitingInput = true;
-
+const createProjectDOM = () => {
     const createProject = createElements();
     const projectsContainer = document.querySelector('.project-list');
 
-    const projectListElement = createProject.createListElement();
+    const projectListElement =  createProject.createListElement();
     
+    const projectInputForm = createProject.createForm();
     const projectNameInput = createProject.createInputField();
+    projectInputForm.append(projectNameInput);
 
     const newProject = (name) => {
         const newProject = createProject.createSpanElement('project-name');
@@ -53,22 +54,40 @@ const addProject = () => {
         return newProject;
     }
 
-    projectNameInput.addEventListener('keypress', function (e) {
-        if (e.key === 'Enter' && projectNameInput.value != '') {
-            const projectName = projectNameInput.value;
-            projectNameInput.remove();
-            projectListElement.insertBefore(newProject(projectName), iconSpan);
-            return awaitingInput = false;
-        }
-    });
-
     const iconSpan = createProject.createSpanElement('icons');
     const editIcon = createProject.createImageElement('images/edit-icon.svg', 'edit-icon');
     const deleteIcon = createProject.createImageElement('images/delete-icon.svg', 'delete-icon');
     
     iconSpan.append(editIcon, deleteIcon);
-    projectListElement.append(projectNameInput, iconSpan);
+    projectListElement.append(projectInputForm, iconSpan);
     projectsContainer.insertBefore(projectListElement, projectsContainer.lastElementChild);
+
+    return {newProject, projectNameInput, projectInputForm, iconSpan, projectListElement}
+}
+
+// Add Project Factory Function
+const addProject = () => {
+    /* TODO: use awaitingInput variable to prevent add project button 
+    being pressed multiple times.
+
+    Also make it so that if the user clicks add project and then clicks 
+    something else with out choosing a name to remove it
+    */
+    let awaitingInput = true;
+
+    const createDOMElements = createProjectDOM();
+   
+    createDOMElements.projectInputForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const projectName = createDOMElements.projectNameInput.value;
+
+        if (projectName.match(/^[\s]/)) return alert('Project name cannot start with a space');
+
+        createDOMElements.projectInputForm.remove();
+        createDOMElements.projectListElement.insertBefore(createDOMElements.newProject(projectName), createDOMElements.iconSpan);
+        return awaitingInput = false;
+    });
+
 }
 
 export default addProject
