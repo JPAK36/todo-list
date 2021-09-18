@@ -19,29 +19,55 @@ const createElements = () => {
         img.setAttribute('src', src);
         return img;
     }
+    
+    const createInputField = () => {
+        const userInput = document.createElement('input');
+        userInput.setAttribute('type', 'text');
+        userInput.setAttribute('placeholder', 'Project name...');
+        userInput.setAttribute('id', 'user-input');
+        return userInput;
+    }
 
-    return {createListElement, createSpanElement, createImageElement}
+    return {createListElement, createSpanElement, createImageElement, createInputField}
 }
 
 // Add Project Factory Function
 const addProject = () => {
+    /* TODO: use awaitingInput variable to prevent add project button 
+    being pressed multiple times. Consider cleaning the code up a bit
+    by moving DOM related items to separate module
+
+    */
+    let awaitingInput = true;
+
     const createProject = createElements();
     const projectsContainer = document.querySelector('.project-list');
-    const addProjectBtn = document.querySelector('#add-project');
-
 
     const projectListElement = createProject.createListElement();
-    // TODO: Find a way to allow user to input project name.
-        // Try: Add input field after the projectListElement is appended to the page
-        // or use contentEditable = true
-    const projectName = createProject.createSpanElement('project-name');
-    projectName.textContent = 'Lorem Ipsum';
+    
+    const projectNameInput = createProject.createInputField();
+
+    const newProject = (name) => {
+        const newProject = createProject.createSpanElement('project-name');
+        newProject.textContent = name;
+        return newProject;
+    }
+
+    projectNameInput.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter' && projectNameInput.value != '') {
+            const projectName = projectNameInput.value;
+            projectNameInput.remove();
+            projectListElement.insertBefore(newProject(projectName), iconSpan);
+            return awaitingInput = false;
+        }
+    });
+
     const iconSpan = createProject.createSpanElement('icons');
     const editIcon = createProject.createImageElement('images/edit-icon.svg', 'edit-icon');
     const deleteIcon = createProject.createImageElement('images/delete-icon.svg', 'delete-icon');
     
     iconSpan.append(editIcon, deleteIcon);
-    projectListElement.append(projectName, iconSpan);
+    projectListElement.append(projectNameInput, iconSpan);
     projectsContainer.insertBefore(projectListElement, projectsContainer.lastElementChild);
 }
 

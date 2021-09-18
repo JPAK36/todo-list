@@ -20,6 +20,6 @@ const sidebarController = (() => {
         button.addEventListener('click', toggleSidebar);
     });    
 
-    const addProjectBtn = document.querySelector('#add-project');
+    const addProjectBtn = document.querySelector('[data-add-project]');
     addProjectBtn.addEventListener('click', addProject);
 })();
