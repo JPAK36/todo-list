@@ -65,6 +65,13 @@ const createProjectDOM = () => {
     return {newProject, projectNameInput, projectInputForm, iconSpan, projectListElement}
 }
 
+const awaitingInput = () => {
+    const userInput = document.querySelector('#user-input');
+    if (userInput != null) return true;
+
+    return false;
+}
+
 // Add Project Factory Function
 const addProject = () => {
     /* TODO: use awaitingInput variable to prevent add project button 
@@ -73,7 +80,7 @@ const addProject = () => {
     Also make it so that if the user clicks add project and then clicks 
     something else with out choosing a name to remove it
     */
-    let awaitingInput = true;
+    if (awaitingInput()) return;
 
     const createDOMElements = createProjectDOM();
    
@@ -84,8 +91,7 @@ const addProject = () => {
         if (projectName.match(/^[\s]/)) return alert('Project name cannot start with a space');
 
         createDOMElements.projectInputForm.remove();
-        createDOMElements.projectListElement.insertBefore(createDOMElements.newProject(projectName), createDOMElements.iconSpan);
-        return awaitingInput = false;
+        createDOMElements.projectListElement.insertBefore(createDOMElements.newProject(projectName), createDOMElements.iconSpan); 
     });
 
 }
