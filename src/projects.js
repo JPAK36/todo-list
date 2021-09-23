@@ -4,6 +4,7 @@ const createElements = () => {
     
     const createListElement = () => {
         const li = document.createElement('li');
+        li.setAttribute('class', 'project-item');
         return li;
     }
 
@@ -93,7 +94,17 @@ const addProject = () => {
         createDOMElements.projectInputForm.remove();
         createDOMElements.projectListElement.insertBefore(createDOMElements.newProject(projectName), createDOMElements.iconSpan); 
     });
-
 }
 
-export default addProject
+const deleteProject = () => {
+    document.addEventListener('click', (e) => {
+        if (e.target.className === 'delete-icon') {
+            e.target.closest('.project-item').remove();
+        }
+    });
+}
+
+export { 
+    addProject,
+    deleteProject
+}
