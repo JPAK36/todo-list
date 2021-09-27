@@ -18,8 +18,10 @@ const sidebarController = (() => {
     const toggleBtn = document.querySelectorAll('.bars-icon');
     toggleBtn.forEach(button => {
         button.addEventListener('click', toggleSidebar);
-    });    
+    });        
+})();
 
+const projectController = (() => {
     deleteProject();
     const addProjectBtn = document.querySelector('[data-add-project]');
     addProjectBtn.addEventListener('click', addProject);
