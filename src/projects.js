@@ -73,27 +73,27 @@ const awaitingInput = () => {
     return false;
 }
 
+const handleUserInput = () => { 
+    const userInput = document.querySelector('#user-input')
+    const inputForm = userInput.parentElement;
+    const projectItem = inputForm.parentElement;
+    const projectSpan = createElements().createSpanElement('project-name');
+
+    inputForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const projectName = userInput.value;
+        if (projectName.match(/^[\s]/)) return alert('Project name cannot start with a space');
+        projectSpan.textContent = projectName;
+        userInput.parentElement.remove();
+        projectItem.insertBefore(projectSpan, projectItem.childNodes[0]); 
+    });
+}
+
 // Add Project Factory Function
 const addProject = () => {
-    /* TODO: use awaitingInput variable to prevent add project button 
-    being pressed multiple times.
-
-    Also make it so that if the user clicks add project and then clicks 
-    something else with out choosing a name to remove it
-    */
     if (awaitingInput()) return;
-
-    const createDOMElements = createProjectDOM();
-   
-    createDOMElements.projectInputForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const projectName = createDOMElements.projectNameInput.value;
-
-        if (projectName.match(/^[\s]/)) return alert('Project name cannot start with a space');
-
-        createDOMElements.projectInputForm.remove();
-        createDOMElements.projectListElement.insertBefore(createDOMElements.newProject(projectName), createDOMElements.iconSpan); 
-    });
+    createProjectDOM();
+    handleUserInput();
 }
 
 const deleteProject = () => {
@@ -103,8 +103,25 @@ const deleteProject = () => {
         }
     });
 }
+ 
+const editProject = (e) => {
+    if (awaitingInput()) return;
+    const inputForm = createElements().createForm();
+    const inputField = createElements().createInputField();
+    const projectName = e.target.parentElement.previousElementSibling;
+
+    inputField.value = projectName.textContent;
+    projectName.remove();
+    inputForm.append(inputField);
+
+    const projectItem = e.target.closest('.project-item');
+    projectItem.insertBefore(inputForm, projectItem.childNodes[0]);
+
+    handleUserInput();
+}
 
 export { 
     addProject,
-    deleteProject
+    deleteProject,
+    editProject
 }

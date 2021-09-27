@@ -1,4 +1,4 @@
-import {addProject, deleteProject} from "./projects";
+import {addProject, deleteProject, editProject} from "./projects";
 
 // Sidebar Module
 const sidebarController = (() => {
@@ -23,4 +23,10 @@ const sidebarController = (() => {
     deleteProject();
     const addProjectBtn = document.querySelector('[data-add-project]');
     addProjectBtn.addEventListener('click', addProject);
+    
+    document.addEventListener('click', (e) => {
+        if (e.target.className === 'edit-icon') {
+            editProject(e);
+        }
+    });
 })();
