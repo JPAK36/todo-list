@@ -18,6 +18,7 @@ const createElements = () => {
         const img = document.createElement('img');
         img.classList.add(htmlClass);
         img.setAttribute('src', src);
+        img.setAttribute('draggable', 'false');
         return img;
     }
     
@@ -98,7 +99,7 @@ const addProject = () => {
 
 const deleteProject = () => {
     document.addEventListener('click', (e) => {
-        if (e.target.className === 'delete-icon') {
+        if (e.target.closest('.delete-icon')) {
             e.target.closest('.project-item').remove();
         }
     });

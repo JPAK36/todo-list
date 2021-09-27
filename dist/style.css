@@ -311,6 +311,7 @@ h3 {
 .hidden {
     visibility: hidden;
 }
+
 @media screen and (min-width: 1024px) {
     #bars-icon-mobile {
         display: none;
