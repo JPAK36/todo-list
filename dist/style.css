@@ -87,6 +87,13 @@ body {
     height: 24px;
     margin-left: 10px;
 }
+.completed .edit-icon, .completed .delete-icon {
+    fill: #808080;
+}
+
+.completed .edit-icon:hover, .completed .delete-icon:hover {
+    fill: black
+}
 
 .add-icon {
     width: 28px;
@@ -221,10 +228,6 @@ h3 {
     text-decoration-color: #808080;
     text-decoration-thickness: 2px;
     color: #808080
-}
-
-.completed > .icons {
-    fill: #808080;
 }
 
 .completed > .due-date > svg {
