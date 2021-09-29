@@ -27,10 +27,10 @@ const createElements = () => {
         return inputForm;
     }
 
-    const createInputField = () => {
+    const createInputField = (placeholderText) => {
         const userInput = document.createElement('input');
         userInput.setAttribute('type', 'text');
-        userInput.setAttribute('placeholder', 'Project name...');
+        userInput.setAttribute('placeholder', placeholderText);
         userInput.setAttribute('id', 'user-input');
         userInput.required = true;
 
@@ -47,7 +47,7 @@ const createProjectDOM = () => {
     const projectListElement =  createProject.createListElement();
     
     const projectInputForm = createProject.createForm();
-    const projectNameInput = createProject.createInputField();
+    const projectNameInput = createProject.createInputField('Project name...');
     projectInputForm.append(projectNameInput);
 
     const newProject = (name) => {
@@ -108,7 +108,7 @@ const deleteProject = () => {
 const editProject = (e) => {
     if (awaitingInput()) return;
     const inputForm = createElements().createForm();
-    const inputField = createElements().createInputField();
+    const inputField = createElements().createInputField('Project name...');
     const projectName = e.target.parentElement.previousElementSibling;
 
     inputField.value = projectName.textContent;
