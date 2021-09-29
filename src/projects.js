@@ -1,64 +1,23 @@
-
-// DOM Elements Factory Function
-const createElements = () => {
-    
-    const createListElement = () => {
-        const li = document.createElement('li');
-        li.setAttribute('class', 'project-item');
-        return li;
-    }
-
-    const createSpanElement = (htmlClass) => {
-        const span = document.createElement('span');
-        span.classList.add(htmlClass);
-        return span;
-    }
-
-    const createImageElement = (src, htmlClass) => {
-        const img = document.createElement('img');
-        img.classList.add(htmlClass);
-        img.setAttribute('src', src);
-        img.setAttribute('draggable', 'false');
-        return img;
-    }
-    
-    const createForm = () => {
-        const inputForm = document.createElement('form');
-        return inputForm;
-    }
-
-    const createInputField = (placeholderText) => {
-        const userInput = document.createElement('input');
-        userInput.setAttribute('type', 'text');
-        userInput.setAttribute('placeholder', placeholderText);
-        userInput.setAttribute('id', 'user-input');
-        userInput.required = true;
-
-        return userInput;
-    }
-
-    return {createListElement, createSpanElement, createImageElement, createInputField, createForm}
-}
+import createElements from "./createDOMElements";
 
 const createProjectDOM = () => {
-    const createProject = createElements();
     const projectsContainer = document.querySelector('.project-list');
 
-    const projectListElement =  createProject.createListElement();
+    const projectListElement =  createElements.createListElement();
     
-    const projectInputForm = createProject.createForm();
-    const projectNameInput = createProject.createInputField('Project name...');
+    const projectInputForm = createElements.createForm();
+    const projectNameInput = createElements.createInputField('Project name...');
     projectInputForm.append(projectNameInput);
 
     const newProject = (name) => {
-        const newProject = createProject.createSpanElement('project-name');
+        const newProject = createElements.createSpanElement('project-name');
         newProject.textContent = name;
         return newProject;
     }
 
-    const iconSpan = createProject.createSpanElement('icons');
-    const editIcon = createProject.createImageElement('images/edit-icon.svg', 'edit-icon');
-    const deleteIcon = createProject.createImageElement('images/delete-icon.svg', 'delete-icon');
+    const iconSpan = createElements.createSpanElement('icons');
+    const editIcon = createElements.createImageElement('images/edit-icon.svg', 'edit-icon');
+    const deleteIcon = createElements.createImageElement('images/delete-icon.svg', 'delete-icon');
     
     iconSpan.append(editIcon, deleteIcon);
     projectListElement.append(projectInputForm, iconSpan);
@@ -78,7 +37,7 @@ const handleUserInput = () => {
     const userInput = document.querySelector('#user-input')
     const inputForm = userInput.parentElement;
     const projectItem = inputForm.parentElement;
-    const projectSpan = createElements().createSpanElement('project-name');
+    const projectSpan = createElements.createSpanElement('project-name');
 
     inputForm.addEventListener('submit', function (e) {
         e.preventDefault();
@@ -107,8 +66,8 @@ const deleteProject = () => {
  
 const editProject = (e) => {
     if (awaitingInput()) return;
-    const inputForm = createElements().createForm();
-    const inputField = createElements().createInputField('Project name...');
+    const inputForm = createElements.createForm();
+    const inputField = createElements.createInputField('Project name...');
     const projectName = e.target.parentElement.previousElementSibling;
 
     inputField.value = projectName.textContent;
@@ -124,5 +83,6 @@ const editProject = (e) => {
 export { 
     addProject,
     deleteProject,
-    editProject
+    editProject,
+    createElements
 }
