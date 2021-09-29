@@ -1,4 +1,5 @@
 import {addProject, deleteProject, editProject} from "./projects";
+import toggleTask from "./tasks";
 
 // Sidebar Module
 const sidebarController = (() => {
@@ -29,6 +30,15 @@ const projectController = (() => {
     document.addEventListener('click', (e) => {
         if (e.target.className === 'edit-icon') {
             editProject(e);
+        }
+    });
+})();
+
+const taskController = (() => {
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('task-item')) {
+            const taskElement = e.target.parentElement;
+            toggleTask(taskElement);
         }
     });
 })();

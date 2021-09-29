@@ -90,7 +90,6 @@ const handleUserInput = () => {
     });
 }
 
-// Add Project Factory Function
 const addProject = () => {
     if (awaitingInput()) return;
     createProjectDOM();
@@ -99,6 +98,7 @@ const addProject = () => {
 
 const deleteProject = () => {
     document.addEventListener('click', (e) => {
+        // TODO: Add delete-project class to delete btn to avoid errors when user clicks delete task btn
         if (e.target.closest('.delete-icon')) {
             e.target.closest('.project-item').remove();
         }
