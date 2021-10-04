@@ -1,5 +1,5 @@
 import {addProject, deleteProject, editProject} from "./projects";
-import toggleTask from "./tasks";
+import {toggleTask, addTaskToDOM} from "./tasks";
 
 // Sidebar Module
 const sidebarController = (() => {
@@ -28,7 +28,7 @@ const projectController = (() => {
     addProjectBtn.addEventListener('click', addProject);
     
     document.addEventListener('click', (e) => {
-        if (e.target.className === 'edit-icon') {
+        if (e.target.classList.contains('edit-project')) {
             editProject(e);
         }
     });
@@ -40,5 +40,13 @@ const taskController = (() => {
             const taskElement = e.target.parentElement;
             toggleTask(taskElement);
         }
+    });
+
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('add-task')) {
+            console.log('add task');
+            addTaskToDOM();
+        }
+
     });
 })();

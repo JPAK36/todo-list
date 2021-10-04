@@ -3,7 +3,7 @@ import createElements from "./createDOMElements";
 const createProjectDOM = () => {
     const projectsContainer = document.querySelector('.project-list');
 
-    const projectListElement =  createElements.createListElement();
+    const projectListElement =  createElements.createListElement('project-item');
     
     const projectInputForm = createElements.createForm();
     const projectNameInput = createElements.createInputField('Project name...');
@@ -18,6 +18,9 @@ const createProjectDOM = () => {
     const iconSpan = createElements.createSpanElement('icons');
     const editIcon = createElements.createImageElement('images/edit-icon.svg', 'edit-icon');
     const deleteIcon = createElements.createImageElement('images/delete-icon.svg', 'delete-icon');
+    
+    editIcon.classList.add('edit-project');
+    deleteIcon.classList.add('delete-project');
     
     iconSpan.append(editIcon, deleteIcon);
     projectListElement.append(projectInputForm, iconSpan);
@@ -57,8 +60,7 @@ const addProject = () => {
 
 const deleteProject = () => {
     document.addEventListener('click', (e) => {
-        // TODO: Add delete-project class to delete btn to avoid errors when user clicks delete task btn
-        if (e.target.closest('.delete-icon')) {
+        if (e.target.closest('.delete-project')) {
             e.target.closest('.project-item').remove();
         }
     });

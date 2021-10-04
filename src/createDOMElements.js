@@ -1,9 +1,9 @@
 // DOM Elements Factory Function
 const createElements = () => {
     
-    const createListElement = () => {
+    const createListElement = (htmlClass) => {
         const li = document.createElement('li');
-        li.setAttribute('class', 'project-item');
+        li.setAttribute('class', htmlClass);
         return li;
     }
 
