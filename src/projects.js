@@ -36,32 +36,39 @@ const awaitingInput = () => {
     return false;
 }
 
+const getUserInput = () => {
+    const userInput = document.querySelector('#user-input');
+    const projectName = userInput.value;
+
+    return projectName;
+}
+
 const handleUserInput = () => { 
     const userInput = document.querySelector('#user-input')
     const inputForm = userInput.parentElement;
     const projectItem = inputForm.parentElement;
     const projectSpan = createElements.createSpanElement('project-name');
 
-    inputForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const projectName = userInput.value;
-        if (projectName.match(/^[\s]/)) return alert('Project name cannot start with a space');
-        projectSpan.textContent = projectName;
-        userInput.parentElement.remove();
-        projectItem.insertBefore(projectSpan, projectItem.childNodes[0]); 
-        // TODO: Consider implementing addProjectToNotepad separate from this function on submit
-        addProjectToNotepad(projectName);
-    });
+    
+    const projectName = getUserInput();
+    if (projectName.match(/^[\s]/)) return alert('Project name cannot start with a space');
+
+    projectSpan.textContent = projectName;
+    userInput.parentElement.remove();
+    projectItem.insertBefore(projectSpan, projectItem.childNodes[0]); 
 }
 
-const addProjectToNotepad = (projectName) => {
+const addProjectToNotepad = () => {
+    const projectList = document.querySelector('.project-list');
+    const currentProjectNumber = projectList.childElementCount - 2;
+    const projectName = projectList.children[currentProjectNumber].textContent;
+
     const notepad = document.querySelector('#writing-area');
     const projectDiv = createElements.createDiv('project');
     const skipLine = createElements.createDiv('skip-line');
     
     const projectHeading = createElements.createDiv('project-heading');
     const h2 = document.createElement('h2');
-    //const projectName = document.querySelector('.project-name');
     h2.setAttribute('class', 'notepad-text');
     h2.textContent = projectName;
     const h3 = document.createElement('h3');
@@ -78,7 +85,15 @@ const addProjectToNotepad = (projectName) => {
 const addProject = () => {
     if (awaitingInput()) return;
     addProjectToSidebar();
-    handleUserInput();
+
+    const userInput = document.querySelector('#user-input')
+    const inputForm = userInput.parentElement;
+
+    inputForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        handleUserInput();
+        if (!awaitingInput()) addProjectToNotepad();
+    });
 }
 
 const deleteProject = () => {
@@ -102,7 +117,12 @@ const editProject = (e) => {
     const projectItem = e.target.closest('.project-item');
     projectItem.insertBefore(inputForm, projectItem.childNodes[0]);
 
-    handleUserInput();
+    inputForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        handleUserInput();
+        //if (!awaitingInput()) editProjectOnNotepad();
+    });
+//    handleUserInput();
 }
 
 export { 
