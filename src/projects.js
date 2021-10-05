@@ -1,6 +1,6 @@
 import createElements from "./createDOMElements";
 
-const createProjectDOM = () => {
+const addProjectToSidebar = () => {
     const projectsContainer = document.querySelector('.project-list');
 
     const projectListElement =  createElements.createListElement('project-item');
@@ -49,12 +49,35 @@ const handleUserInput = () => {
         projectSpan.textContent = projectName;
         userInput.parentElement.remove();
         projectItem.insertBefore(projectSpan, projectItem.childNodes[0]); 
+        // TODO: Consider implementing addProjectToNotepad separate from this function on submit
+        addProjectToNotepad(projectName);
     });
 }
 
+const addProjectToNotepad = (projectName) => {
+    const notepad = document.querySelector('#writing-area');
+    const projectDiv = createElements.createDiv('project');
+    const skipLine = createElements.createDiv('skip-line');
+    
+    const projectHeading = createElements.createDiv('project-heading');
+    const h2 = document.createElement('h2');
+    //const projectName = document.querySelector('.project-name');
+    h2.setAttribute('class', 'notepad-text');
+    h2.textContent = projectName;
+    const h3 = document.createElement('h3');
+    h3.setAttribute('class', 'notepad-text');
+    h3.textContent = 'Due Date';
+    
+    projectHeading.append(h2, h3);
+    projectDiv.append(projectHeading);
+    notepad.append(projectDiv, skipLine);
+    // TODO: add Add Task button
+}
+// TODO: create function to update project name on notepad when user edits it
+
 const addProject = () => {
     if (awaitingInput()) return;
-    createProjectDOM();
+    addProjectToSidebar();
     handleUserInput();
 }
 

@@ -36,7 +36,13 @@ const createElements = () => {
         return userInput;
     }
 
-    return {createListElement, createSpanElement, createImageElement, createInputField, createForm}
+    const createDiv = (htmlClass) => {
+        const div = document.createElement('div');
+        div.setAttribute('class', htmlClass);
+        return div;
+    }
+
+    return {createListElement, createSpanElement, createImageElement, createInputField, createForm, createDiv}
 }
 
 export default createElements();
