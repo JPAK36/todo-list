@@ -74,11 +74,20 @@ const addProjectToNotepad = () => {
     const h3 = document.createElement('h3');
     h3.setAttribute('class', 'notepad-text');
     h3.textContent = 'Due Date';
-    
+        
+    const tasksContainer = document.createElement('ul');
+    tasksContainer.classList.add('notepad-text', 'todos');
+
+    const addTaskListElement = createElements.createListElement('task');
+    const addTaskSpan = createElements.createSpanElement('add-task');
+    const addIcon = createElements.createImageElement('images/add-icon.svg', 'add-icon');
+    addTaskSpan.append(addIcon, 'Add Task');
+
+    addTaskListElement.append(addTaskSpan);
+    tasksContainer.append(addTaskListElement);
     projectHeading.append(h2, h3);
-    projectDiv.append(projectHeading);
+    projectDiv.append(projectHeading, tasksContainer);
     notepad.append(projectDiv, skipLine);
-    // TODO: add Add Task button
 }
 // TODO: create function to update project name on notepad when user edits it
 
@@ -122,7 +131,6 @@ const editProject = (e) => {
         handleUserInput();
         //if (!awaitingInput()) editProjectOnNotepad();
     });
-//    handleUserInput();
 }
 
 export { 
