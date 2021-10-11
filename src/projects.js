@@ -36,22 +36,14 @@ const awaitingInput = () => {
     return false;
 }
 
-const getUserInput = () => {
-    const userInput = document.querySelector('#user-input');
-    const projectName = userInput.value;
-
-    return projectName;
-}
-
 const handleUserInput = () => { 
     const userInput = document.querySelector('#user-input')
     const inputForm = userInput.parentElement;
     const projectItem = inputForm.parentElement;
     const projectSpan = createElements.createSpanElement('project-name');
-
     
-    const projectName = getUserInput();
-    if (projectName.match(/^[\s]/)) return alert('Project name cannot start with a space');
+    const projectName = userInput.value.trim()
+    if (!projectName) return;
 
     projectSpan.textContent = projectName;
     userInput.parentElement.remove();
@@ -89,7 +81,6 @@ const addProjectToNotepad = () => {
     projectDiv.append(projectHeading, tasksContainer);
     notepad.append(projectDiv, skipLine);
 }
-// TODO: create function to update project name on notepad when user edits it
 
 const addProject = () => {
     if (awaitingInput()) return;
@@ -98,13 +89,19 @@ const addProject = () => {
     const userInput = document.querySelector('#user-input')
     const inputForm = userInput.parentElement;
 
+    userInput.addEventListener('blur', function () {
+        if (userInput.value != '') handleUserInput();
+        if (!awaitingInput()) addProjectToNotepad();
+    });
+
     inputForm.addEventListener('submit', function (e) {
         e.preventDefault();
         handleUserInput();
         if (!awaitingInput()) addProjectToNotepad();
     });
 }
-
+// TODO: Look into how to add local storage to possibly make editing and deleting easier. Or reference library project for its use of arrays to store user data
+// TODO: Add function to delete project from notepad as well
 const deleteProject = () => {
     document.addEventListener('click', (e) => {
         if (e.target.closest('.delete-project')) {
@@ -112,6 +109,7 @@ const deleteProject = () => {
         }
     });
 }
+// TODO: create function to update project name on notepad when user edits it
  
 const editProject = (e) => {
     if (awaitingInput()) return;
@@ -125,6 +123,13 @@ const editProject = (e) => {
 
     const projectItem = e.target.closest('.project-item');
     projectItem.insertBefore(inputForm, projectItem.childNodes[0]);
+
+    const userInput = document.querySelector('#user-input');
+
+    userInput.addEventListener('blur', function () {
+        if (userInput.value != '') handleUserInput();
+        //if (!awaitingInput()) editProjectToNotepad();
+    });
 
     inputForm.addEventListener('submit', function (e) {
         e.preventDefault();

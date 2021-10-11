@@ -90,11 +90,11 @@ body {
 }
 
 .completed .edit-icon, .completed .delete-icon {
-    fill: #808080;
+    filter: invert(53%) sepia(9%) saturate(17%) hue-rotate(348deg) brightness(94%) contrast(90%);
 }
 
 .completed .edit-icon:hover, .completed .delete-icon:hover {
-    fill: black
+    filter: invert(0%) sepia(2%) saturate(7494%) hue-rotate(163deg) brightness(91%) contrast(99%);
 }
 
 .add-icon {
@@ -110,7 +110,6 @@ body {
 
 li:hover > #add-project, li:hover > #add-project > .add-icon {
     color: black;
-    fill: black;
     filter: invert(0%) sepia(2%) saturate(7494%) hue-rotate(163deg) brightness(91%) contrast(99%);
 }
 
