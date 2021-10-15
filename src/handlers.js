@@ -27,7 +27,8 @@ const handlers = () => {
     const onProjectAdd = (projectName) => {
         // pass user input into function
         const newProject =  {
-            projectName: projectName
+            projectName: projectName,
+            tasks: '[]'
         }
         updateStorage.saveProject(newProject);
         // add input to page
@@ -36,17 +37,17 @@ const handlers = () => {
         _setActiveTab(newProjectDOMElement);
     }
 
-    const onProjectEdit = (projectObject, tasks) => {
+    const onProjectEdit = (projectId, projectName, tasks) => {
         updateStorage.saveProject({
-            id: projectObject.id,
-            projectName: projectObject.projectName,
+            id: projectId,
+            projectName: projectName,
             tasks: tasks
         });
-        
+
         _refreshProjectList();
     }
 
-    return { onProjectSelect, onProjectAdd, }
+    return { onProjectSelect, onProjectAdd, onProjectEdit }
     
 }
 

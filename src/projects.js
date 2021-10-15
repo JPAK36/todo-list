@@ -73,16 +73,22 @@ const editProject = (e) => {
     projectItem.insertBefore(inputForm, projectItem.childNodes[0]);
 
     const userInput = document.querySelector('#user-input');
+    
+    const projectId = projectItem.dataset.projectId;
 
     userInput.addEventListener('blur', function () {
         if (userInput.value != '') handleUserInput();
-        //if (!awaitingInput()) editProjectToNotepad();
+        //if (!awaitingInput()) editProjectOnNotepad();
+        const projectName = projectItem.firstElementChild.textContent;
+        handlers.onProjectEdit(projectId, projectName, 'beans');
     });
 
     inputForm.addEventListener('submit', function (e) {
         e.preventDefault();
         handleUserInput();
         //if (!awaitingInput()) editProjectOnNotepad();
+        const projectName = projectItem.firstElementChild.textContent;
+        handlers.onProjectEdit(projectId, projectName, 'beans');
     });
 }
 
