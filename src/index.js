@@ -1,5 +1,13 @@
-import {addProject, deleteProject, editProject} from "./projects";
-import {toggleTask, addTaskToDOM} from "./tasks";
+import { addProject, deleteProject, editProject } from "./projects";
+import updateStorage from "./storage";
+import { updateProjectList } from "./createDOMElements";
+import { toggleTask, addTaskToDOM } from "./tasks";
+
+// Load localStorage items on page load
+window.onload = () => {
+    const projects = updateStorage.getProjects();
+    updateProjectList(projects);
+}
 
 // Sidebar Module
 const sidebarController = (() => {
@@ -50,3 +58,11 @@ const taskController = (() => {
 
     });
 })();
+/*
+updateStorage.saveProject({
+    projectName: "Project 1",
+    tasks: [["Finish todo list", "low", "dueDate", false], ["Do something", "medium", "dueDate", true], ["Do something else", "high", "dueDate", false]],
+    id: 816089
+});
+*/
+//storage.deleteProject(581840);
