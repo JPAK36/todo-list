@@ -148,16 +148,15 @@ const updateProjectList = (projects) => {
     });
 }
 
-const updateActiveTab = (projectObject) => {
+const updateActiveTab = (tab) => {
     // for all other projects, change display to none, to bring back set display to contents  
         // item.style.display = 'none'
     // remove active class from any other sidebar element
     const currentActiveTab = document.querySelector('.active');
-    currentActiveTab.classList.remove('active');
-    const project = document.querySelector(`[data-project-id='${projectObject.id}']`);
-    project.classList.add('active');
-    const projectNameSpan = project.children.item(0);
-    console.log(projectNameSpan);
+    if (currentActiveTab) currentActiveTab.classList.remove('active');
+    tab.classList.add('active');
+    const projectNameSpan = tab.children.item(0); // Update notepad here?
+    //console.log(projectNameSpan);
 }
 
 export { addProjectToSidebar, addProjectToNotepad, createElements, updateProjectList, updateActiveTab};

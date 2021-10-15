@@ -16,8 +16,6 @@ const updateStorage = () => {
         if (existing) {
             existing.projectName = projectToSave.projectName;
             existing.tasks = projectToSave.tasks;
-            existing.dueDate = projectToSave.dueDate;
-            existing.priority = projectToSave.priority;
         }
         else {
             projectToSave.id = Math.floor(Math.random() * 1000000);

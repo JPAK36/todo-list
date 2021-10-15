@@ -4,25 +4,23 @@ import updateStorage from "./storage";
 const handlers = () => {
     
     const _refreshProjectList = () => {
-        const projects = updateStorage.getProjects(); // Update projects in storage
+        const projects = updateStorage.getProjects(); // Update projects in storage        
         _setProjectList(projects); // Update projects on DOM
-        //_setActiveTab(tab)
     }
 
     const _setProjectList = (projects) => {
-        updateProjectList(projects); // TODO: create updateProjectList function
+        updateProjectList(projects);
     }
 
     const _setActiveTab = (tab) => {
-        const activeTab = tab;
-        updateActiveTab(tab) // TODO: create updateActiveTab function
+        updateActiveTab(tab);
     }
 
     // Here be handlers
     const onProjectSelect = (projectId) => {
         const projects = updateStorage.getProjects();
-        const selectedProject = projects.find(project => project.id == projectId); // Don't think it will know what projects is, might have to declare variable
-        //console.log(selectedProject);
+        const projectObject = projects.find(project => project.id == projectId); // Don't think it will know what projects is, might have to declare variable
+        const selectedProject = document.querySelector(`[data-project-id='${projectObject.id}']`);
         _setActiveTab(selectedProject);
     }
 
@@ -34,6 +32,9 @@ const handlers = () => {
         updateStorage.saveProject(newProject);
         // add input to page
         _refreshProjectList();
+        const newProjectDOMElement = document.querySelector(`[data-project-id='${newProject.id}']`);
+        console.log(newProjectDOMElement);
+        _setActiveTab(newProjectDOMElement);
     }
 
     return { onProjectSelect, onProjectAdd, }
