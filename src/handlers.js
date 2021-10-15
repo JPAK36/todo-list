@@ -33,8 +33,17 @@ const handlers = () => {
         // add input to page
         _refreshProjectList();
         const newProjectDOMElement = document.querySelector(`[data-project-id='${newProject.id}']`);
-        console.log(newProjectDOMElement);
         _setActiveTab(newProjectDOMElement);
+    }
+
+    const onProjectEdit = (projectObject, tasks) => {
+        updateStorage.saveProject({
+            id: projectObject.id,
+            projectName: projectObject.projectName,
+            tasks: tasks
+        });
+        
+        _refreshProjectList();
     }
 
     return { onProjectSelect, onProjectAdd, }
