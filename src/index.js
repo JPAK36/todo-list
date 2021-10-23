@@ -52,8 +52,8 @@ const taskController = (() => {
 
     document.addEventListener('click', (e) => {
         if (e.target.classList.contains('add-task')) {
-            console.log('add task');
-            addTaskToDOM();
+            const addTaskBtn = e.target;
+            addTaskToDOM(addTaskBtn);
         }
 
     });

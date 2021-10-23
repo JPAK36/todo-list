@@ -1,5 +1,6 @@
 import { updateProjectList, updateActiveTab } from "./createDOMElements";
 import updateStorage from "./storage";
+import {format} from "date-fns"
 
 const handlers = () => {
     
@@ -35,6 +36,20 @@ const handlers = () => {
         _refreshProjectList();
         const newProjectDOMElement = document.querySelector(`[data-project-id='${newProject.id}']`);
         _setActiveTab(newProjectDOMElement);
+    }
+
+    const onTaskAdd = () => {
+        const date = new Date();
+        const currentDate = format(date, "MM/dd/yyyy");
+
+        const newTask = {
+            task: {
+                item: 'name',
+                priority: low,
+                dueDate: currentDate,
+                isComplete: false
+            }
+        }
     }
 
     const onProjectEdit = (projectId, projectName, tasks) => {
