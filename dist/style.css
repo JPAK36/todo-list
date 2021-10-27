@@ -89,7 +89,7 @@ body {
     margin-left: 10px;
 }
 
-.completed .edit-icon, .completed .delete-icon {
+.completed .edit-icon, .completed .delete-icon, .completed .priority-icon, .completed .calendar-icon {
     filter: invert(53%) sepia(9%) saturate(17%) hue-rotate(348deg) brightness(94%) contrast(90%);
 }
 
@@ -271,25 +271,28 @@ h3 {
     position: relative;
     top: 8px;
     margin-right: 20px;
-    fill: hsl(120, 100%, 40%);
 }
 
 .priority-low {
-    fill: hsl(120, 100%, 40%);
+    fill: #00cc00;
+    filter: invert(42%) sepia(98%) saturate(1895%) hue-rotate(90deg) brightness(107%) contrast(115%);
 }
 
 .priority-medium {
-    fill: rgb(255, 166, 0);
+    fill: #ffa600;
+    filter: invert(77%) sepia(31%) saturate(6510%) hue-rotate(359deg) brightness(102%) contrast(106%);
 }
 
 .priority-high {
-    fill: red;
+    fill: #ff0000;
+    filter: invert(26%) sepia(100%) saturate(6166%) hue-rotate(355deg) brightness(96%) contrast(125%);
 }
 
 .calendar-icon {
     width: 24px;
+    height: 24px;
     position: relative;
-    top: 9px;
+    top: 8px;
     margin-left: 20px;
 }
 

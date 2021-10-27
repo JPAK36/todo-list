@@ -1,6 +1,6 @@
 import { updateProjectList, updateActiveTab } from "./createDOMElements";
 import updateStorage from "./storage";
-import {format} from "date-fns"
+import {format} from "date-fns";
 
 const handlers = () => {
     

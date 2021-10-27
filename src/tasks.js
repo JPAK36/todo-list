@@ -1,4 +1,5 @@
 import {createElements} from "./createDOMElements";
+import {format} from "date-fns";
 
 const toggleTask = (taskElement) => {
     taskElement.classList.toggle('completed');
@@ -16,8 +17,9 @@ const addTaskToDOM = (addTaskBtn) => {
 
     iconSpan.append(editIcon, deleteIcon);
     taskSpan.append(iconSpan);
-    taskListElement.append(taskSpan);
-    // need to append taskSpan to whichever project it belongs to
+    const dueDate = addDueDateToDOM();
+    taskListElement.append(taskSpan, dueDate);
+    
     const container = addTaskBtn.closest('.todos');
     const numberOfTasks = container.childElementCount - 2;
 
@@ -27,13 +29,19 @@ const addTaskToDOM = (addTaskBtn) => {
 }
 
 const addDueDateToDOM = () => {
-    // create span with class 'due-date'
-    // create priority icon with class 'priority-icon priority-low'
-    // create span with class 'date' and set textContent to default date (current date)
-    // create calendar icon with class 'calendar-icon'
-    const createDueDate = createElements();
+    const dueDateSpan = createElements().createSpanElement('due-date');
 
-    //const dueDateSpan = createDueDate.
+    const priorityIcon = createElements().createImageElement('images/priority-icon.svg', 'priority-icon')
+    priorityIcon.classList.add('priority-low');
+    
+    const currentDate = createElements().createSpanElement('date');
+    currentDate.textContent = format(new Date(), 'MM/dd/yyyy');
+
+    const calendarIcon = createElements().createImageElement('images/calendar-icon.svg', 'calendar-icon');
+
+    dueDateSpan.append(priorityIcon, currentDate, calendarIcon);
+    
+    return dueDateSpan;
 }
 
 const addTask = () => {
