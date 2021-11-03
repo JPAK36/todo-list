@@ -32,7 +32,11 @@ const addProject = () => {
     const projectItem = inputForm.parentElement;
 
     userInput.addEventListener('blur', function () {
-        if (userInput.value != '') handleUserInput();
+        if (userInput.value == '') {
+            projectItem.remove();
+            return;
+        }
+        handleUserInput();
         if (!awaitingInput()) addProjectToNotepad();
         const projectName = projectItem.firstElementChild.textContent;
         handlers.onProjectAdd(projectName); 
