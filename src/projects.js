@@ -1,5 +1,6 @@
 import { addProjectToSidebar, addProjectToNotepad, createElements } from "./createDOMElements";
 import handlers from "./handlers";
+import updateStorage from "./storage"
 
 const awaitingInput = () => {
     const userInput = document.querySelector('#user-input');
@@ -55,9 +56,13 @@ const addProject = () => {
 const deleteProject = () => {
     document.addEventListener('click', (e) => {
         if (e.target.closest('.delete-project')) {
-            e.target.closest('.project-item').remove();
+            const projectItem = e.target.closest('.project-item')
+            projectItem.remove();
+            const projectId = projectItem.dataset.projectId;
+            updateStorage.deleteProject(projectId);
         }
     });
+    // TODO: Remove project from notepad by reloading localStorage items for current selected tab (i.e. Today). If current select tab is the one that is deleted load notepad with Home tab 
 }
 // TODO: create function to update project name on notepad when user edits it
  
