@@ -6,6 +6,7 @@ const toggleTask = (taskElement) => {
 }
 
 const addTaskToDOM = (addTaskBtn) => {
+    if (document.getElementById('user-input')) return;
     const taskListElement = createElements().createListElement('task');
     const taskSpan = createElements().createSpanElement('task-item');
     taskSpan.textContent = 'user input'; // TODO: Get user input

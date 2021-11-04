@@ -51,8 +51,6 @@ const addProject = () => {
         handlers.onProjectAdd(projectName); 
     });
 }
-// TODO: Look into how to add local storage to possibly make editing and deleting easier. Or reference library project for its use of arrays to store user data
-// TODO: Add function to delete project from notepad as well
 const deleteProject = () => {
     document.addEventListener('click', (e) => {
         if (e.target.closest('.delete-project')) {
@@ -64,6 +62,7 @@ const deleteProject = () => {
     });
     // TODO: Remove project from notepad by reloading localStorage items for current selected tab (i.e. Today). If current select tab is the one that is deleted load notepad with Home tab 
 }
+
 // TODO: create function to update project name on notepad when user edits it
  
 const editProject = (e) => {
