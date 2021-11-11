@@ -9,7 +9,11 @@ const addTaskToDOM = (addTaskBtn) => {
     if (document.getElementById('user-input')) return;
     const taskListElement = createElements().createListElement('task');
     const taskSpan = createElements().createSpanElement('task-item');
-    taskSpan.textContent = 'user input'; // TODO: Get user input
+    const inputForm = createElements().createForm();
+    const inputField = createElements().createInputField('Enter Task...');
+    
+    inputForm.append(inputField);
+    taskSpan.append(inputForm);
 
     const iconSpan = createElements().createSpanElement('icons');
     // TODO: Can't add second class with this method so figure out another way to add a second class to icons
@@ -26,6 +30,10 @@ const addTaskToDOM = (addTaskBtn) => {
 
     container.insertBefore(taskListElement, container.children[numberOfTasks]);
 
+    setTimeout(() => {
+        inputField.focus();
+    }, 0);
+    
     return taskSpan;
 }
 
@@ -45,12 +53,46 @@ const addDueDateToDOM = () => {
     return dueDateSpan;
 }
 
-const addTask = () => {
-    // create li with class 'task' and append everything to it
+const awaitingInput = () => {
+    const userInput = document.querySelector('#user-input');
+    if (userInput != null) return true;
 
+    return false;
+}
+
+const addTask = () => {
+    const inputField = document.querySelector('#user-input');
+    const inputForm = inputField.parentElement;
+
+    inputField.addEventListener('blur', function () {
+        validateUserInput();
+    });
+    
+    inputForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        validateUserInput();
+    });
+}
+
+const validateUserInput = () => {
+    const inputField = document.querySelector('#user-input');
+    const inputForm = inputField.parentElement;
+    const taskItem = inputForm.parentElement;
+    const taskContainer = taskItem.parentElement;
+    const iconSpan = taskItem.lastElementChild;
+
+    const userInput = inputField.value.trim();
+    
+        if (userInput == '') {
+            taskContainer.remove();
+            return;
+        }
+        inputForm.remove();
+        iconSpan.insertAdjacentText('beforebegin', userInput);
 }
 
 export {
     toggleTask,
     addTaskToDOM,
+    addTask
 }

@@ -1,7 +1,7 @@
 import { addProject, deleteProject, editProject } from "./projects";
 import updateStorage from "./storage";
 import { updateProjectList } from "./createDOMElements";
-import { toggleTask, addTaskToDOM } from "./tasks";
+import { toggleTask, addTaskToDOM, addTask } from "./tasks";
 
 // Load localStorage items on page load
 window.onload = () => {
@@ -34,7 +34,7 @@ const projectController = (() => {
     deleteProject();
     const addProjectBtn = document.querySelector('[data-add-project]');
     addProjectBtn.addEventListener('click', addProject);
-    
+
     document.addEventListener('click', (e) => {
         if (e.target.classList.contains('edit-project')) {
             editProject(e);
@@ -48,14 +48,10 @@ const taskController = (() => {
             const taskElement = e.target.parentElement;
             toggleTask(taskElement);
         }
-    });
-
-    document.addEventListener('click', (e) => {
         if (e.target.classList.contains('add-task')) {
-            const addTaskBtn = e.target;
-            addTaskToDOM(addTaskBtn);
+            addTaskToDOM(e.target);
+            addTask();
         }
-
     });
 })();
 /*

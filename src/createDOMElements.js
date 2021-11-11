@@ -75,6 +75,10 @@ const addProjectToSidebar = () => {
     const iconSpan = createIconSpan();
     projectListElement.append(projectInputForm, iconSpan);
     projectsContainer.insertBefore(projectListElement, projectsContainer.lastElementChild);
+
+    setTimeout(() => {
+        projectNameInput.focus();
+    }, 0);
 }
 
 const addProjectToNotepad = () => {

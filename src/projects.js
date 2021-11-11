@@ -16,7 +16,7 @@ const handleUserInput = () => {
     const projectItem = inputForm.parentElement;
     const projectSpan = createElements().createSpanElement('project-name');
     
-    const projectName = userInput.value.trim()
+    const projectName = userInput.value.trim();
     if (!projectName) return;
 
     projectSpan.textContent = projectName;
@@ -28,12 +28,12 @@ const addProject = () => {
     if (awaitingInput()) return;
     addProjectToSidebar();
     
-    const userInput = document.querySelector('#user-input')
+    const userInput = document.querySelector('#user-input');
     const inputForm = userInput.parentElement;
     const projectItem = inputForm.parentElement;
 
     userInput.addEventListener('blur', function () {
-        if (userInput.value == '') {
+        if (userInput.value.trim() == '') {
             projectItem.remove();
             return;
         }
