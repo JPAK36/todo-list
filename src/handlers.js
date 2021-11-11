@@ -20,7 +20,7 @@ const handlers = () => {
     // Here be handlers
     const onProjectSelect = (projectId) => {
         const projects = updateStorage.getProjects();
-        const projectObject = projects.find(project => project.id == projectId); // Don't think it will know what projects is, might have to declare variable
+        const projectObject = projects.find(project => project.id == projectId);
         const selectedProject = document.querySelector(`[data-project-id='${projectObject.id}']`);
         _setActiveTab(selectedProject);
     }

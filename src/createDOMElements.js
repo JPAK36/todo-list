@@ -81,7 +81,7 @@ const addProjectToSidebar = () => {
     }, 0);
 }
 
-const addProjectToNotepad = () => {
+const addProjectToNotepad = (projectId) => {
     const view = createElements();
     const projectList = document.querySelector('.project-list');
     const currentProjectNumber = projectList.childElementCount - 2;
@@ -89,6 +89,7 @@ const addProjectToNotepad = () => {
 
     const notepad = document.querySelector('#writing-area');
     const projectDiv = view.createDiv('project');
+    projectDiv.setAttribute('data-project-id', projectId);
     const skipLine = view.createDiv('skip-line');
     
     const projectHeading = view.createDiv('project-heading');

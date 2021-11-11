@@ -38,17 +38,24 @@ const addProject = () => {
             return;
         }
         handleUserInput();
-        if (!awaitingInput()) addProjectToNotepad();
+
         const projectName = projectItem.firstElementChild.textContent;
         handlers.onProjectAdd(projectName); 
+
+        const projectList = document.querySelector('.project-list');
+        // Select last project added and get id attribute
+        const projectId = projectList.children[projectList.childElementCount - 2].getAttribute('data-project-id');
+        if (!awaitingInput()) addProjectToNotepad(projectId);
     });
 
     inputForm.addEventListener('submit', function (e) {
         e.preventDefault();
         handleUserInput();
-        if (!awaitingInput()) addProjectToNotepad();
         const projectName = projectItem.firstElementChild.textContent;
         handlers.onProjectAdd(projectName); 
+        const projectList = document.querySelector('.project-list');
+        const projectId = projectList.children[projectList.childElementCount - 2].getAttribute('data-project-id');
+        if (!awaitingInput()) addProjectToNotepad(projectId);
     });
 }
 const deleteProject = () => {

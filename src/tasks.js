@@ -33,7 +33,7 @@ const addTaskToDOM = (addTaskBtn) => {
     setTimeout(() => {
         inputField.focus();
     }, 0);
-    
+
     return taskSpan;
 }
 
@@ -51,13 +51,6 @@ const addDueDateToDOM = () => {
     dueDateSpan.append(priorityIcon, currentDate, calendarIcon);
     
     return dueDateSpan;
-}
-
-const awaitingInput = () => {
-    const userInput = document.querySelector('#user-input');
-    if (userInput != null) return true;
-
-    return false;
 }
 
 const addTask = () => {
