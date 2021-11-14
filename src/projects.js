@@ -95,7 +95,7 @@ const editProject = (e) => {
         if (userInput.value != '') handleUserInput();
         //if (!awaitingInput()) editProjectOnNotepad();
         const projectName = projectItem.firstElementChild.textContent;
-        handlers.onProjectEdit(projectId, projectName, 'beans'); // TODO: Figure out how to store task data
+        handlers.onProjectEdit(projectId, projectName, 'beans'); // TODO: Figure out how to store task data, this doesn't work
     });
 
     inputForm.addEventListener('submit', function (e) {
@@ -103,7 +103,7 @@ const editProject = (e) => {
         handleUserInput();
         //if (!awaitingInput()) editProjectOnNotepad();
         const projectName = projectItem.firstElementChild.textContent;
-        handlers.onProjectEdit(projectId, projectName, 'beans'); // TODO: Figure out how to store task data
+        handlers.onProjectEdit(projectId, projectName, 'beans'); // TODO: Figure out how to store task data, this doesn't work
     });
 }
 

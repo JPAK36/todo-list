@@ -1,5 +1,6 @@
 import {createElements} from "./createDOMElements";
 import {format} from "date-fns";
+import handlers from "./handlers";
 
 const toggleTask = (taskElement) => {
     taskElement.classList.toggle('completed');
@@ -57,13 +58,19 @@ const addTask = () => {
     const inputField = document.querySelector('#user-input');
     const inputForm = inputField.parentElement;
 
-    inputField.addEventListener('blur', function () {
+    inputField.addEventListener('blur', function (e) {
+        const projectId = e.target.closest('[data-project-id]').dataset.projectId;
+        const task = inputField.value;
         validateUserInput();
+        if (task) handlers.onTaskAdd(task, projectId);
     });
     
     inputForm.addEventListener('submit', function (e) {
         e.preventDefault();
+        const projectId = e.target.closest('[data-project-id]').dataset.projectId;
+        const task = inputField.value;
         validateUserInput();
+        if (task) handlers.onTaskAdd(task, projectId);
     });
 }
 
