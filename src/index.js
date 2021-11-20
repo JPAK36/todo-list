@@ -13,7 +13,7 @@ window.onload = () => {
 const sidebarController = (() => {
 
     const mobileToggleBtn = document.getElementById('bars-icon-mobile');
-    if (screen.width <= 1024 && mobileToggleBtn.classList.contains('hidden')) {
+    if (window.innerWidth <= 1024 && mobileToggleBtn.classList.contains('hidden')) {
         mobileToggleBtn.classList.toggle('hidden');
     }
 
@@ -21,7 +21,7 @@ const sidebarController = (() => {
     
     const toggleSidebar = () => {
         sidebar.classList.toggle('toggle-sidebar');
-        if (screen.width <= 1024) mobileToggleBtn.classList.toggle('hidden');
+        if (window.innerWidth <= 1024) mobileToggleBtn.classList.toggle('hidden');
     }
     
     const toggleBtn = document.querySelectorAll('.bars-icon');
