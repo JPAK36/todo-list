@@ -1,7 +1,7 @@
 import { addProject, deleteProject, editProject } from "./projects";
 import updateStorage from "./storage";
 import { updateProjectList } from "./createDOMElements";
-import { toggleTask, addTaskToDOM, addTask } from "./tasks";
+import { toggleTask, addTaskToDOM, addTask, updatePriority } from "./tasks";
 
 // Load localStorage items on page load
 window.onload = () => {
@@ -51,6 +51,9 @@ const taskController = (() => {
         if (e.target.classList.contains('add-task')) {
             addTaskToDOM(e.target);
             addTask();
+        }
+        if (e.target.classList.contains('priority-icon')) {
+            updatePriority(e.target);
         }
     });
 })();

@@ -91,8 +91,33 @@ const validateUserInput = () => {
         iconSpan.insertAdjacentText('beforebegin', userInput);
 }
 
+// TODO: Update priority in localStorage
+const updatePriority = (eventTarget) => {
+    const taskItemClassList = eventTarget.parentElement.parentElement.classList;
+    if (taskItemClassList.contains('completed')) return;
+
+    const priorityClassList = eventTarget.classList;
+
+    if (priorityClassList.contains('priority-low')) {
+        priorityClassList.remove('priority-low');
+        priorityClassList.add('priority-medium');
+        return;
+    }
+    if (priorityClassList.contains('priority-medium')) {
+        priorityClassList.remove('priority-medium');
+        priorityClassList.add('priority-high');
+        return;
+    }
+    if (priorityClassList.contains('priority-high')) {
+        priorityClassList.remove('priority-high');
+        priorityClassList.add('priority-low');
+        return;
+    }
+}
+
 export {
     toggleTask,
     addTaskToDOM,
-    addTask
+    addTask,
+    updatePriority
 }
