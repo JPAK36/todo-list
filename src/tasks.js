@@ -44,13 +44,18 @@ const addDueDateToDOM = () => {
     const priorityIcon = createElements().createImageElement('images/priority-icon.svg', 'priority-icon')
     priorityIcon.classList.add('priority-low');
     
-    const currentDate = createElements().createSpanElement('date');
-    currentDate.textContent = format(new Date(), 'MM/dd/yyyy');
+    const dateLabel = document.createElement('label');
+    dateLabel.classList.add('date-label');
+    
+    const dateInput = document.createElement('input');
+    dateInput.setAttribute('type', 'date');
+    dateInput.required = true;
 
     const calendarIcon = createElements().createImageElement('images/calendar-icon.svg', 'calendar-icon');
 
-    dueDateSpan.append(priorityIcon, currentDate, calendarIcon);
-    
+    dateLabel.append(dateInput, calendarIcon);
+    dueDateSpan.append(priorityIcon, dateLabel);
+
     return dueDateSpan;
 }
 
