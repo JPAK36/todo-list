@@ -17,9 +17,13 @@ const addTaskToDOM = (addTaskBtn) => {
     taskSpan.append(inputForm);
 
     const iconSpan = createElements().createSpanElement('icons');
-    // TODO: Can't add second class with this method so figure out another way to add a second class to icons
     const editIcon = createElements().createImageElement('images/edit-icon.svg', 'edit-icon');
     const deleteIcon = createElements().createImageElement('images/delete-icon.svg', 'delete-icon');
+    
+    deleteIcon.addEventListener('click', () => {
+        taskListElement.remove();
+        // TODO: Remove task from localStorage
+    });
 
     iconSpan.append(editIcon, deleteIcon);
     taskSpan.append(iconSpan);
@@ -124,5 +128,5 @@ export {
     toggleTask,
     addTaskToDOM,
     addTask,
-    updatePriority
+    updatePriority,
 }
