@@ -37,7 +37,7 @@ const handlers = () => {
         const newProjectDOMElement = document.querySelector(`[data-project-id='${newProject.id}']`);
         _setActiveTab(newProjectDOMElement);
     }
-
+    // Add optional parameters? priority = 'low', dueDate = currentDate, isComplete= false
     const onTaskAdd = (task, id) => {
         const date = new Date();
         const currentDate = format(date, "MM/dd/yyyy");

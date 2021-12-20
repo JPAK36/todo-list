@@ -1,6 +1,7 @@
 import {createElements} from "./createDOMElements";
 import {format} from "date-fns";
 import handlers from "./handlers";
+import updateStorage from "./storage";
 
 const toggleTask = (taskElement) => {
     taskElement.classList.toggle('completed');
@@ -35,11 +36,14 @@ const addTaskToDOM = (addTaskBtn) => {
         taskSpan.insertBefore(inputForm, iconSpan);
         taskListElement.prepend(taskSpan);
         addTask();
+        // TODO: Update task in local storage
     });
 
-    deleteIcon.addEventListener('click', () => {
+    deleteIcon.addEventListener('click', (e) => {
+        const projectId = e.target.closest('[data-project-id]').dataset.projectId;
+        const taskToDelete = e.target.parentElement.previousElementSibling.textContent;
         taskListElement.remove();
-        // TODO: Remove task from localStorage
+        updateStorage.deleteTask(projectId, taskToDelete);
     });
 
     iconSpan.append(editIcon, deleteIcon);

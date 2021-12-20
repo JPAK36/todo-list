@@ -14,7 +14,7 @@ const updateStorage = () => {
         
         if (existing) {
             existing.projectName = projectToSave.projectName;
-            existing.tasks = projectToSave.tasks;
+            //existing.tasks = projectToSave.tasks;
         }
         else {
             projectToSave.id = Math.floor(Math.random() * 1000000);
@@ -33,7 +33,18 @@ const updateStorage = () => {
         localStorage.setItem('projects', JSON.stringify(updatedProjectList));
    }
 
-    return { getProjects, saveProject, deleteProject }
+   const deleteTask = (id, taskToDelete) => {
+        const projects = getProjects();
+        const projectWithTask = projects.filter(project => project.id == id)[0];
+        const allTasks = projectWithTask.tasks;
+        // Each task is an object
+        const updatedTaskObj = allTasks.filter(taskObj => taskObj.task.item != taskToDelete);
+        projectWithTask.tasks = updatedTaskObj;
+
+        saveProject(projectWithTask);
+   }
+
+    return { getProjects, saveProject, deleteProject, deleteTask }
 }
 
 export default updateStorage();
