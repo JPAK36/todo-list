@@ -43,6 +43,7 @@ const addTaskToDOM = (addTaskBtn) => {
         const projectId = e.target.closest('[data-project-id]').dataset.projectId;
         const taskToDelete = e.target.parentElement.previousElementSibling.textContent;
         taskListElement.remove();
+        // TODO: Update this if using taskId
         updateStorage.deleteTask(projectId, taskToDelete);
     });
 
@@ -87,12 +88,14 @@ const addDueDateToDOM = () => {
 const addTask = () => {
     const inputField = document.querySelector('#user-input');
     const inputForm = inputField.parentElement;
+    const taskContainer = inputForm.parentElement.parentElement;
 
     inputField.addEventListener('blur', function (e) {
         const projectId = e.target.closest('[data-project-id]').dataset.projectId;
         const task = inputField.value;
         validateUserInput();
-        if (task) handlers.onTaskAdd(task, projectId);
+        //if (task) handlers.onTaskAdd(task, projectId);
+        if (task) createTask(task, projectId, taskContainer);
     });
     
     inputForm.addEventListener('submit', function (e) {
@@ -100,8 +103,13 @@ const addTask = () => {
         const projectId = e.target.closest('[data-project-id]').dataset.projectId;
         const task = inputField.value;
         validateUserInput();
-        if (task) handlers.onTaskAdd(task, projectId);
+        if (task) createTask(task, projectId, taskContainer);
     });
+}
+
+const createTask = (task, projectId, taskContainer) => {
+    const taskObj = handlers.onTaskAdd(task, projectId);
+    taskContainer.setAttribute('data-task-id', taskObj.task.taskId);
 }
 
 const validateUserInput = () => {
@@ -109,7 +117,6 @@ const validateUserInput = () => {
     const inputForm = inputField.parentElement;
     const taskItem = inputForm.parentElement;
     const taskContainer = taskItem.parentElement;
-    const iconSpan = taskItem.lastElementChild;
 
     const userInput = inputField.value.trim();
     const taskTextSpan = createElements().createSpanElement('task-text');

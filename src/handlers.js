@@ -39,14 +39,12 @@ const handlers = () => {
     }
     // Add optional parameters? priority = 'low', dueDate = currentDate, isComplete= false
     const onTaskAdd = (task, id) => {
-        const date = new Date();
-        const currentDate = format(date, "MM/dd/yyyy");
-
         const newTask = {
             task: {
-                item: task, // set to text content of added project, all others are default
+                item: task, 
+                taskId: Math.floor(Math.random() * 1000000),
                 priority: 'low',
-                dueDate: currentDate,
+                dueDate: null,
                 isComplete: false
             }
         }
@@ -59,6 +57,7 @@ const handlers = () => {
                 // 2) find project matching id: const projectToUpdate = projects.find(project => project.id == id)
                 // 3) get tasks array and append newTask: projectToUpdate.tasks.push(newTask);
                 // 4) saveProject to localStorage: updateStorage.saveProject(projectToUpdate); *Might have to edit saveProject function in storage.js
+        return newTask;
     }
 
     // TODO: This doesn't work. Make this onProjectNameEdit and have separate onTaskEdit function?
