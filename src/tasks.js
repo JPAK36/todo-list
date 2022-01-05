@@ -41,10 +41,10 @@ const addTaskToDOM = (addTaskBtn) => {
 
     deleteIcon.addEventListener('click', (e) => {
         const projectId = e.target.closest('[data-project-id]').dataset.projectId;
-        const taskToDelete = e.target.parentElement.previousElementSibling.textContent;
+        const taskId = e.target.closest('[data-task-id]').dataset.taskId;
+
         taskListElement.remove();
-        // TODO: Update this if using taskId
-        updateStorage.deleteTask(projectId, taskToDelete);
+        updateStorage.deleteTask(projectId, taskId);
     });
 
     iconSpan.append(editIcon, deleteIcon);
@@ -94,7 +94,6 @@ const addTask = () => {
         const projectId = e.target.closest('[data-project-id]').dataset.projectId;
         const task = inputField.value;
         validateUserInput();
-        //if (task) handlers.onTaskAdd(task, projectId);
         if (task) createTask(task, projectId, taskContainer);
     });
     
@@ -128,7 +127,6 @@ const validateUserInput = () => {
         }
         inputForm.remove();
         taskItem.prepend(taskTextSpan);
-        //iconSpan.insertAdjacentText('beforebegin', userInput);
 }
 
 // TODO: Update priority in localStorage

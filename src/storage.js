@@ -33,13 +33,12 @@ const updateStorage = () => {
         localStorage.setItem('projects', JSON.stringify(updatedProjectList));
    }
 
-   // TODO: Update this function to use taskId instead of taskToDelete
-   const deleteTask = (id, taskToDelete) => {
+   const deleteTask = (id, taskId) => {
         const projects = getProjects();
         const projectWithTask = projects.filter(project => project.id == id)[0];
         const allTasks = projectWithTask.tasks;
         // Each task is an object
-        const updatedTaskObj = allTasks.filter(taskObj => taskObj.task.item != taskToDelete);
+        const updatedTaskObj = allTasks.filter(taskObj => taskObj.task.taskId != taskId);
         projectWithTask.tasks = updatedTaskObj;
 
         saveProject(projectWithTask);
