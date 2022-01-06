@@ -40,13 +40,11 @@ const handlers = () => {
     // Add optional parameters? priority = 'low', dueDate = currentDate, isComplete= false
     const onTaskAdd = (task, id) => {
         const newTask = {
-            task: {
-                item: task, 
-                taskId: Math.floor(Math.random() * 1000000),
-                priority: 'low',
-                dueDate: null,
-                isComplete: false
-            }
+            item: task, 
+            taskId: Math.floor(Math.random() * 1000000),
+            priority: 'low',
+            dueDate: null,
+            isComplete: false
         }
         const projects = updateStorage.getProjects();
         const projectToUpdate = projects.find(project => project.id == id);
@@ -59,9 +57,8 @@ const handlers = () => {
                 // 4) saveProject to localStorage: updateStorage.saveProject(projectToUpdate); *Might have to edit saveProject function in storage.js
         return newTask;
     }
-
-    // TODO: This doesn't work. Make this onProjectNameEdit and have separate onTaskEdit function?
-    const onProjectEdit = (projectId, projectName, tasks) => {
+    
+    const onProjectNameEdit = (projectId, projectName, tasks = updateStorage.getTasks(projectId)) => {
         updateStorage.saveProject({
             id: projectId,
             projectName: projectName,
@@ -71,7 +68,11 @@ const handlers = () => {
         _refreshProjectList();
     }
 
-    return { onProjectSelect, onProjectAdd, onProjectEdit, onTaskAdd }
+    /*const onTaskNameEdit = (taskId, taskName) => {
+        
+    }*/
+
+    return { onProjectSelect, onProjectAdd, onProjectNameEdit, onTaskAdd }
     
 }
 

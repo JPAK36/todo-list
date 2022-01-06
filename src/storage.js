@@ -6,6 +6,13 @@ const updateStorage = () => {
         return projects;
     }
 
+    const getTasks = (projectId) => {
+        const projects = getProjects();
+        const currentProject = projects.find(project => project.id == projectId);
+        const tasks = currentProject.tasks;
+        return tasks;
+    }
+
     const saveProject = (projectToSave) => {
         const projects = getProjects();
 
@@ -26,25 +33,39 @@ const updateStorage = () => {
         localStorage.setItem('projects', JSON.stringify(projects));
     }
 
-   const deleteProject = (id) => {
+    const saveTask = (projectId, taskToSave) => {
+        const projects = getProjects();     
+        const projectToUpdate = projects.find(project = project.id == projectId);
+        const tasksArray = projectToUpdate.tasks
+        const existing = tasksArray.find(task => task.taskId == taskToSave.taskId);
+        /*
+        existing = taskToSave;
+        existing.item = taskName;
+        existing.priority = priority;
+        existing.dueDate = dueDate;
+        existing.isComplete = isComplete;
+        */
+    }
+
+    const deleteProject = (id) => {
         const projects = getProjects();
         const updatedProjectList = projects.filter(project => project.id != id);
 
         localStorage.setItem('projects', JSON.stringify(updatedProjectList));
-   }
+    }
 
-   const deleteTask = (id, taskId) => {
+    const deleteTask = (id, taskId) => {
         const projects = getProjects();
-        const projectWithTask = projects.filter(project => project.id == id)[0];
+        const projectWithTask = projects.find(project => project.id == id);
         const allTasks = projectWithTask.tasks;
         // Each task is an object
-        const updatedTaskObj = allTasks.filter(taskObj => taskObj.task.taskId != taskId);
+        const updatedTaskObj = allTasks.filter(taskObj => taskObj.taskId != taskId);
         projectWithTask.tasks = updatedTaskObj;
 
         saveProject(projectWithTask);
-   }
+    }
 
-    return { getProjects, saveProject, deleteProject, deleteTask }
+    return { getProjects, getTasks, saveProject, deleteProject, deleteTask }
 }
 
 export default updateStorage();

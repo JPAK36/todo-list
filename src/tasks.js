@@ -108,7 +108,7 @@ const addTask = () => {
 
 const createTask = (task, projectId, taskContainer) => {
     const taskObj = handlers.onTaskAdd(task, projectId);
-    taskContainer.setAttribute('data-task-id', taskObj.task.taskId);
+    taskContainer.setAttribute('data-task-id', taskObj.taskId);
 }
 
 const validateUserInput = () => {
