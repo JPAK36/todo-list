@@ -24,19 +24,18 @@ const addTaskToDOM = (addTaskBtn) => {
     editIcon.addEventListener('click', () => {
         if (taskListElement.classList.contains('completed')) return;
         const taskTextSpan = document.querySelector('.task-text');
-        const task = taskTextSpan.textContent;
+        const taskName = taskTextSpan.textContent;
         taskTextSpan.remove();
         
         const inputForm = createElements().createForm();
         const inputField = createElements().createInputField('Enter Task...');
 
-        inputField.value = task;
+        inputField.value = taskName;
         
         inputForm.append(inputField);
         taskSpan.insertBefore(inputForm, iconSpan);
         taskListElement.prepend(taskSpan);
         addTask();
-        // TODO: Update task in local storage
     });
 
     deleteIcon.addEventListener('click', (e) => {
@@ -89,7 +88,7 @@ const addTask = () => {
     const inputField = document.querySelector('#user-input');
     const inputForm = inputField.parentElement;
     const taskContainer = inputForm.parentElement.parentElement;
-
+    
     inputField.addEventListener('blur', function (e) {
         const projectId = e.target.closest('[data-project-id]').dataset.projectId;
         const task = inputField.value;
@@ -107,6 +106,9 @@ const addTask = () => {
 }
 
 const createTask = (task, projectId, taskContainer) => {
+    if (taskContainer.dataset.taskId) {
+        return handlers.onTaskNameEdit(projectId, taskContainer.dataset.taskId, task);
+    }
     const taskObj = handlers.onTaskAdd(task, projectId);
     taskContainer.setAttribute('data-task-id', taskObj.taskId);
 }
@@ -121,12 +123,12 @@ const validateUserInput = () => {
     const taskTextSpan = createElements().createSpanElement('task-text');
     taskTextSpan.append(userInput);
 
-        if (userInput == '') {
-            taskContainer.remove();
-            return;
-        }
-        inputForm.remove();
-        taskItem.prepend(taskTextSpan);
+    if (userInput == '') {
+        taskContainer.remove();
+        return;
+    }
+    inputForm.remove();
+    taskItem.prepend(taskTextSpan);
 }
 
 // TODO: Update priority in localStorage

@@ -33,18 +33,29 @@ const updateStorage = () => {
         localStorage.setItem('projects', JSON.stringify(projects));
     }
 
-    const saveTask = (projectId, taskToSave) => {
+    const updateTask = (projectId, updatedTask) => {
+        // tasks for current project
+        const projects = getProjects();
+        const projectToUpdate = projects.find(project => project.id == projectId);
+        const tasksArray = projectToUpdate.tasks;
+        
+        // find task index and replace the task at that index to update
+        const indexOfUpdatedTask = tasksArray.findIndex((taskObj) => {
+            return taskObj.taskId == updatedTask.taskId;
+        });
+
+        tasksArray[indexOfUpdatedTask] = updatedTask;
+        // Save updated tasks array to the project object
+        projectToUpdate.tasks = tasksArray;
+        localStorage.setItem('projects', JSON.stringify(projects));
+    }
+
+    const findTaskToUpdate = (projectId, existingTaskId) => {
         const projects = getProjects();     
-        const projectToUpdate = projects.find(project = project.id == projectId);
+        const projectToUpdate = projects.find(project => project.id == projectId);
         const tasksArray = projectToUpdate.tasks
-        const existing = tasksArray.find(task => task.taskId == taskToSave.taskId);
-        /*
-        existing = taskToSave;
-        existing.item = taskName;
-        existing.priority = priority;
-        existing.dueDate = dueDate;
-        existing.isComplete = isComplete;
-        */
+        const existingTask = tasksArray.find(task => task.taskId == existingTaskId);
+        return existingTask;
     }
 
     const deleteProject = (id) => {
@@ -65,7 +76,7 @@ const updateStorage = () => {
         saveProject(projectWithTask);
     }
 
-    return { getProjects, getTasks, saveProject, deleteProject, deleteTask }
+    return { getProjects, getTasks, saveProject, deleteProject, deleteTask, findTaskToUpdate, updateTask }
 }
 
 export default updateStorage();

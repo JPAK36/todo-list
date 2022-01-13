@@ -37,7 +37,7 @@ const handlers = () => {
         const newProjectDOMElement = document.querySelector(`[data-project-id='${newProject.id}']`);
         _setActiveTab(newProjectDOMElement);
     }
-    // Add optional parameters? priority = 'low', dueDate = currentDate, isComplete= false
+    
     const onTaskAdd = (task, id) => {
         const newTask = {
             item: task, 
@@ -50,11 +50,7 @@ const handlers = () => {
         const projectToUpdate = projects.find(project => project.id == id);
         projectToUpdate.tasks.push(newTask);
         updateStorage.saveProject(projectToUpdate);
-        // TODO: Append newTask to tasks array
-                // 1) Get Projects: const projects = updateStorage.getProjects();
-                // 2) find project matching id: const projectToUpdate = projects.find(project => project.id == id)
-                // 3) get tasks array and append newTask: projectToUpdate.tasks.push(newTask);
-                // 4) saveProject to localStorage: updateStorage.saveProject(projectToUpdate); *Might have to edit saveProject function in storage.js
+        
         return newTask;
     }
     
@@ -68,11 +64,18 @@ const handlers = () => {
         _refreshProjectList();
     }
 
-    /*const onTaskNameEdit = (taskId, taskName) => {
-        
-    }*/
+    const onTaskNameEdit = (projectId, taskId, newTaskName) => {
+        const existingTask = updateStorage.findTaskToUpdate(projectId, taskId);
+        updateStorage.updateTask(projectId, {
+                item: newTaskName,
+                taskId: existingTask.taskId,
+                priority: existingTask.priority,
+                dueDate: existingTask.dueDate,
+                isComplete: existingTask.isComplete
+            });
+    }
 
-    return { onProjectSelect, onProjectAdd, onProjectNameEdit, onTaskAdd }
+    return { onProjectSelect, onProjectAdd, onProjectNameEdit, onTaskAdd, onTaskNameEdit }
     
 }
 
