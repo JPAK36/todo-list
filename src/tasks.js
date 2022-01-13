@@ -123,10 +123,11 @@ const validateUserInput = () => {
     const taskTextSpan = createElements().createSpanElement('task-text');
     taskTextSpan.append(userInput);
 
-    if (userInput == '') {
+    // Removes task container if task isn't yet in localStorage (has a taskId data attribute)
+    if (userInput == '' && !taskContainer.dataset.taskId) {
         taskContainer.remove();
         return;
-    }
+    } else if (userInput == '' && taskContainer.dataset.taskId) return;
     inputForm.remove();
     taskItem.prepend(taskTextSpan);
 }
