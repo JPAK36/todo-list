@@ -97,7 +97,18 @@ const handlers = () => {
             });  
     }
 
-    return { onProjectSelect, onProjectAdd, onProjectNameEdit, onTaskAdd, onTaskNameEdit, onTaskPriorityEdit, onTaskDueDateEdit }
+    const onTaskCompleteEdit = (projectId, taskId, isComplete) => {
+        const existingTask = updateStorage.findTaskToUpdate(projectId, taskId);
+        updateStorage.updateTask(projectId, {
+                item: existingTask.item,
+                taskId: existingTask.taskId,
+                priority: existingTask.priority,
+                dueDate: existingTask.dueDate,
+                isComplete: isComplete
+            });  
+    }
+
+    return { onProjectSelect, onProjectAdd, onProjectNameEdit, onTaskAdd, onTaskNameEdit, onTaskPriorityEdit, onTaskDueDateEdit, onTaskCompleteEdit }
     
 }
 

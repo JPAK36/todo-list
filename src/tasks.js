@@ -5,6 +5,15 @@ import updateStorage from "./storage";
 
 const toggleTask = (taskElement) => {
     taskElement.classList.toggle('completed');
+    let isComplete = false;
+
+    if (taskElement.classList.contains('completed')) {
+        isComplete = true;
+    }
+    const projectId = taskElement.closest('.project').dataset.projectId;
+    const taskId = taskElement.dataset.taskId;
+
+    return handlers.onTaskCompleteEdit(projectId, taskId, isComplete);
 }
 
 const addTaskToDOM = (addTaskBtn) => {
@@ -147,8 +156,8 @@ const validateUserInput = () => {
 const updatePriority = (eventTarget) => {
     const taskItemClassList = eventTarget.parentElement.parentElement.classList;
     if (taskItemClassList.contains('completed')) return;
-    const projectId = eventTarget.closest(['.project']).dataset.projectId;
-    const taskId = eventTarget.closest('[data-task-id').dataset.taskId;
+    const projectId = eventTarget.closest('.project').dataset.projectId;
+    const taskId = eventTarget.closest('[data-task-id]').dataset.taskId;
 
     const priorityClassList = eventTarget.classList;
 

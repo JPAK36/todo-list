@@ -44,8 +44,8 @@ const projectController = (() => {
 
 const taskController = (() => {
     document.addEventListener('click', (e) => {
-        if (e.target.classList.contains('task-item')) {
-            const taskElement = e.target.parentElement;
+        if (e.target.classList.contains('task-text')) {
+            const taskElement = e.target.closest('.task');
             toggleTask(taskElement);
         }
         if (e.target.classList.contains('add-task')) {
@@ -57,11 +57,3 @@ const taskController = (() => {
         }
     });
 })();
-/*
-updateStorage.saveProject({
-    projectName: "Project 1",
-    tasks: [["Finish todo list", "low", "dueDate", false], ["Do something", "medium", "dueDate", true], ["Do something else", "high", "dueDate", false]],
-    id: 816089
-});
-*/
-//storage.deleteProject(581840);
