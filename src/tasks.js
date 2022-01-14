@@ -110,16 +110,16 @@ const addTask = () => {
     const inputForm = inputField.parentElement;
     const taskContainer = inputForm.parentElement.parentElement;
     
-    inputField.addEventListener('blur', function (e) {
-        const projectId = e.target.closest('[data-project-id]').dataset.projectId;
+    inputField.addEventListener('blur', function () {
+        const projectId = taskContainer.closest('[data-project-id]').dataset.projectId;
         const task = inputField.value;
         validateUserInput();
         if (task) createTask(task, projectId, taskContainer);
     });
     
-    inputForm.addEventListener('submit', function (e) {
+    inputForm.addEventListener('submit', function () {
         e.preventDefault();
-        const projectId = e.target.closest('[data-project-id]').dataset.projectId;
+        const projectId = taskContainer.closest('[data-project-id]').dataset.projectId;
         const task = inputField.value;
         validateUserInput();
         if (task) createTask(task, projectId, taskContainer);
