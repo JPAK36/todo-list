@@ -72,10 +72,20 @@ const handlers = () => {
                 priority: existingTask.priority,
                 dueDate: existingTask.dueDate,
                 isComplete: existingTask.isComplete
-            });
+            });  
     }
 
-    return { onProjectSelect, onProjectAdd, onProjectNameEdit, onTaskAdd, onTaskNameEdit }
+    const onTaskPriorityEdit = (projectId, taskId, newPriority) => {
+        const existingTask = updateStorage.findTaskToUpdate(projectId, taskId);
+        updateStorage.updateTask(projectId, {
+                item: existingTask.item,
+                taskId: existingTask.taskId,
+                priority: newPriority,
+                dueDate: existingTask.dueDate,
+                isComplete: existingTask.isComplete
+            });  
+    }
+    return { onProjectSelect, onProjectAdd, onProjectNameEdit, onTaskAdd, onTaskNameEdit, onTaskPriorityEdit }
     
 }
 

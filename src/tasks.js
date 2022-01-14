@@ -127,7 +127,8 @@ const validateUserInput = () => {
     if (userInput == '' && !taskContainer.dataset.taskId) {
         taskContainer.remove();
         return;
-    } else if (userInput == '' && taskContainer.dataset.taskId) return;
+    } 
+    else if (userInput == '' && taskContainer.dataset.taskId) return;
     inputForm.remove();
     taskItem.prepend(taskTextSpan);
 }
@@ -136,23 +137,25 @@ const validateUserInput = () => {
 const updatePriority = (eventTarget) => {
     const taskItemClassList = eventTarget.parentElement.parentElement.classList;
     if (taskItemClassList.contains('completed')) return;
+    const projectId = eventTarget.closest(['.project']).dataset.projectId;
+    const taskId = eventTarget.closest('[data-task-id').dataset.taskId;
 
     const priorityClassList = eventTarget.classList;
 
     if (priorityClassList.contains('priority-low')) {
         priorityClassList.remove('priority-low');
         priorityClassList.add('priority-medium');
-        return;
+        return handlers.onTaskPriorityEdit(projectId, taskId, 'medium'); 
     }
     if (priorityClassList.contains('priority-medium')) {
         priorityClassList.remove('priority-medium');
         priorityClassList.add('priority-high');
-        return;
+        return handlers.onTaskPriorityEdit(projectId, taskId, 'high');
     }
     if (priorityClassList.contains('priority-high')) {
         priorityClassList.remove('priority-high');
         priorityClassList.add('priority-low');
-        return;
+        return handlers.onTaskPriorityEdit(projectId, taskId, 'low');
     }
 }
 
