@@ -80,9 +80,20 @@ const addDueDateToDOM = () => {
 
     dateLabel.append(dateInput, calendarIcon);
     dueDateSpan.append(priorityIcon, dateLabel);
+    
+    // update localStorage on due date change
+    dateInput.addEventListener('change', () => {
+        const projectId = dateInput.closest(['.project']).dataset.projectId;
+        const taskId = dateInput.closest('[data-task-id').dataset.taskId;
+        const newDueDate = dateInput.value;
+
+        return handlers.onTaskDueDateEdit(projectId, taskId, newDueDate);
+    });
 
     return dueDateSpan;
 }
+
+
 
 const addTask = () => {
     const inputField = document.querySelector('#user-input');
@@ -133,7 +144,6 @@ const validateUserInput = () => {
     taskItem.prepend(taskTextSpan);
 }
 
-// TODO: Update priority in localStorage
 const updatePriority = (eventTarget) => {
     const taskItemClassList = eventTarget.parentElement.parentElement.classList;
     if (taskItemClassList.contains('completed')) return;
