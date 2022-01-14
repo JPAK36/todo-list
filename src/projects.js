@@ -83,11 +83,12 @@ const editProject = (e) => {
     inputField.value = projectName.textContent;
     projectName.remove();
     inputForm.append(inputField);
-
+    
     const projectItem = e.target.closest('.project-item');
     projectItem.insertBefore(inputForm, projectItem.childNodes[0]);
-
+    
     const userInput = document.querySelector('#user-input');
+    userInput.focus();
     
     const projectId = projectItem.dataset.projectId;
 

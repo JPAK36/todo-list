@@ -44,6 +44,7 @@ const addTaskToDOM = (addTaskBtn) => {
         inputForm.append(inputField);
         taskSpan.insertBefore(inputForm, iconSpan);
         taskListElement.prepend(taskSpan);
+        inputField.focus();
         addTask();
     });
 
