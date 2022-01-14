@@ -96,6 +96,7 @@ const editProject = (e) => {
         if (userInput.value != '') handleUserInput();
         //if (!awaitingInput()) editProjectOnNotepad();
         const projectName = projectItem.firstElementChild.textContent;
+        updateNameOnNotepad(projectId, projectName);
         handlers.onProjectNameEdit(projectId, projectName);
     });
 
@@ -104,8 +105,17 @@ const editProject = (e) => {
         handleUserInput();
         //if (!awaitingInput()) editProjectOnNotepad();
         const projectName = projectItem.firstElementChild.textContent;
+        updateNameOnNotepad(projectId, projectName);
         handlers.onProjectNameEdit(projectId, projectName);
     });
+
+    const updateNameOnNotepad = (projectId, projectName) => {
+        const notepad = document.querySelector('.notepad');
+        const projectTasksContainer = notepad.querySelector(`[data-project-id="${projectId}"]`);
+        if (projectTasksContainer) {
+            projectTasksContainer.childNodes[0].childNodes[0].textContent = projectName;
+        }
+    }
 }
 
 export { 
