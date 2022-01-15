@@ -158,12 +158,6 @@ const updateProjectList = (projects) => {
     });
 }
 
-const loadAllProjects = (projects) => {
-    projects.forEach(project => {
-        addProjectToNotepad(project.id);
-    });
-}
-
 const updateActiveTab = (tab) => {
     // for all other projects, change display to none, to bring back set display to contents  
         // item.style.display = 'none'
@@ -175,4 +169,4 @@ const updateActiveTab = (tab) => {
     //console.log(projectNameSpan);
 }
 
-export { addProjectToSidebar, addProjectToNotepad, createElements, updateProjectList, updateActiveTab, loadAllProjects };
+export { addProjectToSidebar, addProjectToNotepad, createElements, updateProjectList, updateActiveTab };

@@ -1,11 +1,18 @@
 import { addProject, deleteProject, editProject } from "./projects";
 import updateStorage from "./storage";
-import { updateProjectList, loadAllProjects } from "./createDOMElements";
+import { updateProjectList, addProjectToNotepad } from "./createDOMElements";
 import { toggleTask, addTaskToDOM, addTask, updatePriority } from "./tasks";
 
 // Load localStorage items on page load
 window.onload = () => {
     const projects = updateStorage.getProjects();
+
+    const loadAllProjects = () => {
+        projects.forEach(project => {
+            addProjectToNotepad(project.id);
+        });
+    }  
+    
     updateProjectList(projects);
     loadAllProjects(projects);
 }
