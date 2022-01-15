@@ -1,4 +1,5 @@
 import handlers from "./handlers"
+import updateStorage from "./storage";
 
 // DOM Elements Factory Function
 const createElements = () => {
@@ -83,9 +84,13 @@ const addProjectToSidebar = () => {
 
 const addProjectToNotepad = (projectId) => {
     const view = createElements();
-    const projectList = document.querySelector('.project-list');
-    const currentProjectNumber = projectList.childElementCount - 2;
-    const projectName = projectList.children[currentProjectNumber].textContent;
+    //const projectList = document.querySelector('.project-list');
+
+    const projects = updateStorage.getProjects();
+    const projectToAdd = projects.find(project => project.id == projectId);
+    const projectName = projectToAdd.projectName;
+    //const currentProjectNumber = projectList.childElementCount - 2;
+    //const projectName = projectList.children[currentProjectNumber].textContent;
 
     const notepad = document.querySelector('#writing-area');
     const projectDiv = view.createDiv('project');
@@ -115,8 +120,8 @@ const addProjectToNotepad = (projectId) => {
     notepad.append(projectDiv);
 }
 
+// creates HTML for project items in sidebar from localStorage item
 const _createProjectItemHTML = (id, name) => {
-    // creates HTML for project items in sidebar from localStorage item
     const view = createElements();
 
     const projectItem = view.createListElement('project-item');
@@ -129,7 +134,7 @@ const _createProjectItemHTML = (id, name) => {
 
     return projectItem;
 }
-
+// Updates project list in the sidebar 
 const updateProjectList = (projects) => {
     const projectsListContainer = document.querySelector('.project-list');
     const addProjectBtn = document.querySelector('[data-add-project]');
@@ -153,6 +158,12 @@ const updateProjectList = (projects) => {
     });
 }
 
+const loadAllProjects = (projects) => {
+    projects.forEach(project => {
+        addProjectToNotepad(project.id);
+    });
+}
+
 const updateActiveTab = (tab) => {
     // for all other projects, change display to none, to bring back set display to contents  
         // item.style.display = 'none'
@@ -164,4 +175,4 @@ const updateActiveTab = (tab) => {
     //console.log(projectNameSpan);
 }
 
-export { addProjectToSidebar, addProjectToNotepad, createElements, updateProjectList, updateActiveTab};
+export { addProjectToSidebar, addProjectToNotepad, createElements, updateProjectList, updateActiveTab, loadAllProjects };

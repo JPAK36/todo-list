@@ -1,12 +1,13 @@
 import { addProject, deleteProject, editProject } from "./projects";
 import updateStorage from "./storage";
-import { updateProjectList } from "./createDOMElements";
+import { updateProjectList, loadAllProjects } from "./createDOMElements";
 import { toggleTask, addTaskToDOM, addTask, updatePriority } from "./tasks";
 
 // Load localStorage items on page load
 window.onload = () => {
     const projects = updateStorage.getProjects();
     updateProjectList(projects);
+    loadAllProjects(projects);
 }
 
 // Sidebar Module
