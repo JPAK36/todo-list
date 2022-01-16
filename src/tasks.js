@@ -29,24 +29,6 @@ const addTaskToDOM = (addTaskBtn) => {
     const iconSpan = createElements().createSpanElement('icons');
     const editIcon = createElements().createImageElement('images/edit-icon.svg', 'edit-icon');
     const deleteIcon = createElements().createImageElement('images/delete-icon.svg', 'delete-icon');
-    /*
-    editIcon.addEventListener('click', () => {
-        if (taskListElement.classList.contains('completed')) return;
-        const taskTextSpan = document.querySelector('.task-text');
-        const taskName = taskTextSpan.textContent;
-        taskTextSpan.remove();
-        
-        const inputForm = createElements().createForm();
-        const inputField = createElements().createInputField('Enter Task...');
-
-        inputField.value = taskName;
-        
-        inputForm.append(inputField);
-        taskSpan.insertBefore(inputForm, iconSpan);
-        taskListElement.prepend(taskSpan);
-        inputField.focus();
-        addTask();
-    });*/
 
     iconSpan.append(editIcon, deleteIcon);
     taskSpan.append(iconSpan);
@@ -106,7 +88,7 @@ const addTask = () => {
         if (task) createTask(task, projectId, taskContainer);
     });
     
-    inputForm.addEventListener('submit', function () {
+    inputForm.addEventListener('submit', function (e) {
         e.preventDefault();
         const projectId = taskContainer.closest('[data-project-id]').dataset.projectId;
         const task = inputField.value;
