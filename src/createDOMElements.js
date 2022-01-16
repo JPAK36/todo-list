@@ -180,7 +180,8 @@ const updateProjectList = (projects) => {
     // Add listeners for edit, delete ????
     projectsListContainer.querySelectorAll('.project-item').forEach(projectItem => {
         projectItem.addEventListener('click', (e) => {
-            if (e.target.nodeName === 'IMG') return;
+            const userInput = document.querySelector('#user-input');
+            if (e.target.nodeName === 'IMG' || userInput) return;
             handlers.onProjectSelect(projectItem.dataset.projectId);
         });
     });
