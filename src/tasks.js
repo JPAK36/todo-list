@@ -29,7 +29,7 @@ const addTaskToDOM = (addTaskBtn) => {
     const iconSpan = createElements().createSpanElement('icons');
     const editIcon = createElements().createImageElement('images/edit-icon.svg', 'edit-icon');
     const deleteIcon = createElements().createImageElement('images/delete-icon.svg', 'delete-icon');
-
+    /*
     editIcon.addEventListener('click', () => {
         if (taskListElement.classList.contains('completed')) return;
         const taskTextSpan = document.querySelector('.task-text');
@@ -46,7 +46,7 @@ const addTaskToDOM = (addTaskBtn) => {
         taskListElement.prepend(taskSpan);
         inputField.focus();
         addTask();
-    });
+    });*/
 
     iconSpan.append(editIcon, deleteIcon);
     taskSpan.append(iconSpan);
@@ -57,12 +57,35 @@ const addTaskToDOM = (addTaskBtn) => {
     const numberOfTasks = container.childElementCount - 2;
 
     container.insertBefore(taskListElement, container.children[numberOfTasks]);
-
+    
+    // What is this???
     setTimeout(() => {
         inputField.focus();
     }, 0);
 
     return taskSpan;
+}
+
+const editTask = (task) => {
+    if (task.classList.contains('completed')) return;
+    const taskTextSpan = task.querySelector('.task-text');
+    const taskName = taskTextSpan.textContent;
+    taskTextSpan.remove();
+    
+    const inputForm = createElements().createForm();
+    const inputField = createElements().createInputField('Enter Task...');
+    
+    inputField.value = taskName;
+    inputForm.append(inputField);
+
+    const taskSpan = task.querySelector('.task-item');
+    const iconSpan = task.querySelector('.icons');
+
+    taskSpan.insertBefore(inputForm, iconSpan);
+
+    task.prepend(taskSpan);
+    inputField.focus();
+    addTask();
 }
 
 const deleteTask = (projectId, taskId) => {
@@ -150,5 +173,6 @@ export {
     addTaskToDOM,
     addTask,
     updatePriority,
-    deleteTask
+    deleteTask,
+    editTask
 }

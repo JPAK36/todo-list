@@ -1,7 +1,7 @@
 import { addProject, deleteProject, editProject } from "./projects";
 import updateStorage from "./storage";
 import { updateProjectList, addProjectToNotepad, loadTask } from "./createDOMElements";
-import { toggleTask, addTaskToDOM, addTask, updatePriority, deleteTask } from "./tasks";
+import { toggleTask, addTaskToDOM, addTask, updatePriority, deleteTask, editTask } from "./tasks";
 
 // Load localStorage items on page load
 window.onload = () => {
@@ -77,14 +77,13 @@ const taskController = (() => {
             updatePriority(e.target);
         }
         else if(e.target.classList.contains('edit-icon')) {
-            // edit task
-            console.log('beans');
+            const task = e.target.closest('.task');
+            editTask(task);
         }
         else if(e.target.classList.contains('delete-icon')) {
             const projectId = e.target.closest('[data-project-id]').dataset.projectId;
             const taskId = e.target.closest('[data-task-id]').dataset.taskId;
             deleteTask(projectId, taskId);
         }
-
     });
 })();
