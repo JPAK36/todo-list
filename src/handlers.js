@@ -1,6 +1,6 @@
 import { updateProjectList, updateActiveTab, addProjectToNotepad, loadTask } from "./createDOMElements";
 import updateStorage from "./storage";
-import { isToday, parseISO } from "date-fns";
+import { isThisWeek, isToday, parseISO } from "date-fns";
 
 const handlers = () => {
     
@@ -23,6 +23,7 @@ const handlers = () => {
     }
     
     const onTodayTabSelect = (projects, tab) => {
+        loadAllProjects(projects);
         // Filter projects that have tasks due today
         projects.forEach(project => {
             const tasks = project.tasks;
@@ -44,16 +45,40 @@ const handlers = () => {
                 if (taskContainer) taskContainer.remove();
             });
         });
-
-        
-        // remove tasks that are not due today from dom
-        // remove any projects that do not have tasks due today from dom
-        //console.log(isToday(parseISO("2022-01-12")));
         updateActiveTab(tab);
     }
 
     const dueToday = (task) => {
         if (isToday(parseISO(task.dueDate))) return task;
+    }
+
+    const onThisWeekTabSelect = (projects, tab) => {
+        loadAllProjects(projects);
+
+        projects.forEach(project => {
+            const tasks = project.tasks;
+            const thisWeeksTasks = tasks.filter(task => dueThisWeek(task));
+
+            // Hide project container if no tasks due this week
+            if (thisWeeksTasks.length === 0) {
+                const notepad = document.querySelector('.notepad')
+                const projectContainer = notepad.querySelector(`[data-project-id="${project.id}"]`);
+                projectContainer.remove();
+            }
+
+            // Remove tasks that are not due this week from DOM
+            const notDueThisWeek = tasks.filter(task => !dueThisWeek(task));
+            
+            notDueThisWeek.forEach(task => {
+                const taskContainer = document.querySelector(`[data-task-id="${task.taskId}"]`);
+                if (taskContainer) taskContainer.remove();
+            });
+        });   
+        updateActiveTab(tab);
+    }
+
+    const dueThisWeek = (task) => {
+        if (isThisWeek(parseISO(task.dueDate))) return task;
     }
 
     const loadAllProjects = (projects) => {
@@ -74,6 +99,7 @@ const handlers = () => {
             });
         });
     }  
+
     const clearProjectsFromDOM = () => {
         const writingArea = document.querySelector('#writing-area');
         const projects = writingArea.querySelectorAll('.project');
@@ -170,7 +196,7 @@ const handlers = () => {
             });  
     }
 
-    return { onProjectSelect, onProjectAdd, onProjectNameEdit, onTaskAdd, onTaskNameEdit, onTaskPriorityEdit, onTaskDueDateEdit, onTaskCompleteEdit, onHomeTabSelect, onTodayTabSelect }
+    return { onProjectSelect, onProjectAdd, onProjectNameEdit, onTaskAdd, onTaskNameEdit, onTaskPriorityEdit, onTaskDueDateEdit, onTaskCompleteEdit, onHomeTabSelect, onTodayTabSelect, onThisWeekTabSelect }
     
 }
 

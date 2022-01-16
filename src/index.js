@@ -34,7 +34,9 @@ const sidebarController = (() => {
     });        
 
     const homeTab = sidebar.querySelector('[data-tab="home"]');
-    const todayTab = sidebar.querySelector('[data-tab="today"');
+    const todayTab = sidebar.querySelector('[data-tab="today"]');
+    const thisWeekTab = sidebar.querySelector('[data-tab="this-week"]');
+
     
     homeTab.addEventListener('click', () => {
         const projects = updateStorage.getProjects();
@@ -44,6 +46,11 @@ const sidebarController = (() => {
     todayTab.addEventListener('click', () => {
         const projects = updateStorage.getProjects();
         handlers.onTodayTabSelect(projects, todayTab);
+    });
+
+    thisWeekTab.addEventListener('click', () => {
+        const projects = updateStorage.getProjects();
+        handlers.onThisWeekTabSelect(projects, thisWeekTab);
     });
 
 })();
