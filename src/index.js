@@ -1,7 +1,7 @@
 import { addProject, deleteProject, editProject } from "./projects";
 import updateStorage from "./storage";
 import { updateProjectList, addProjectToNotepad, loadTask } from "./createDOMElements";
-import { toggleTask, addTaskToDOM, addTask, updatePriority } from "./tasks";
+import { toggleTask, addTaskToDOM, addTask, updatePriority, deleteTask } from "./tasks";
 
 // Load localStorage items on page load
 window.onload = () => {
@@ -63,17 +63,28 @@ const projectController = (() => {
 })();
 
 const taskController = (() => {
-    document.addEventListener('click', (e) => {
+    const notepad = document.querySelector('.notepad');
+    notepad.addEventListener('click', (e) => {
         if (e.target.classList.contains('task-text')) {
             const taskElement = e.target.closest('.task');
             toggleTask(taskElement);
         }
-        if (e.target.classList.contains('add-task')) {
+        else if (e.target.classList.contains('add-task')) {
             addTaskToDOM(e.target);
             addTask();
         }
-        if (e.target.classList.contains('priority-icon')) {
+        else if (e.target.classList.contains('priority-icon')) {
             updatePriority(e.target);
         }
+        else if(e.target.classList.contains('edit-icon')) {
+            // edit task
+            console.log('beans');
+        }
+        else if(e.target.classList.contains('delete-icon')) {
+            const projectId = e.target.closest('[data-project-id]').dataset.projectId;
+            const taskId = e.target.closest('[data-task-id]').dataset.taskId;
+            deleteTask(projectId, taskId);
+        }
+
     });
 })();

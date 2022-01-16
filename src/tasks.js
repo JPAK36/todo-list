@@ -48,14 +48,6 @@ const addTaskToDOM = (addTaskBtn) => {
         addTask();
     });
 
-    deleteIcon.addEventListener('click', (e) => {
-        const projectId = e.target.closest('[data-project-id]').dataset.projectId;
-        const taskId = e.target.closest('[data-task-id]').dataset.taskId;
-
-        taskListElement.remove();
-        updateStorage.deleteTask(projectId, taskId);
-    });
-
     iconSpan.append(editIcon, deleteIcon);
     taskSpan.append(iconSpan);
     const dueDate = addDueDateToDOM();
@@ -71,6 +63,12 @@ const addTaskToDOM = (addTaskBtn) => {
     }, 0);
 
     return taskSpan;
+}
+
+const deleteTask = (projectId, taskId) => {
+    const task = document.querySelector(`[data-task-id="${taskId}"]`);
+    task.remove();
+    updateStorage.deleteTask(projectId, taskId);
 }
 
 const addTask = () => {
@@ -152,4 +150,5 @@ export {
     addTaskToDOM,
     addTask,
     updatePriority,
+    deleteTask
 }
