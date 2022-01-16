@@ -124,7 +124,6 @@ const handlers = () => {
         // add input to page
         _refreshProjectList();
         const newProjectDOMElement = document.querySelector(`[data-project-id='${newProject.id}']`);
-        //updateActiveTab(newProjectDOMElement);
     }
     
     const onTaskAdd = (task, id) => {
