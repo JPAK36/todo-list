@@ -58,20 +58,18 @@ const addProject = () => {
         if (!awaitingInput()) addProjectToNotepad(projectId);
     });
 }
+
 const deleteProject = () => {
     const projectList = document.querySelector('.project-list');
     projectList.addEventListener('click', (e) => {
         if (e.target.closest('.delete-project')) {
-            const projectItem = e.target.closest('.project-item')
-            projectItem.remove();
-            const projectId = projectItem.dataset.projectId;
+            const projectId = e.target.closest('[data-project-id]').dataset.projectId;
+            const projectElements = document.querySelectorAll(`[data-project-id="${projectId}"]`);
+            projectElements.forEach(element => element.remove());
             updateStorage.deleteProject(projectId);
         }
     });
-    // TODO: Remove project from notepad by reloading localStorage items for current selected tab (i.e. Today). If current select tab is the one that is deleted load notepad with Home tab 
 }
-
-// TODO: create function to update project name on notepad when user edits it
  
 const editProject = (e) => {
     if (awaitingInput()) return;
@@ -95,7 +93,6 @@ const editProject = (e) => {
 
     userInput.addEventListener('blur', function () {
         if (userInput.value != '') handleUserInput();
-        //if (!awaitingInput()) editProjectOnNotepad();
         const projectName = projectItem.firstElementChild.textContent;
         updateNameOnNotepad(projectId, projectName);
         handlers.onProjectNameEdit(projectId, projectName);
@@ -104,7 +101,6 @@ const editProject = (e) => {
     inputForm.addEventListener('submit', function (e) {
         e.preventDefault();
         handleUserInput();
-        //if (!awaitingInput()) editProjectOnNotepad();
         const projectName = projectItem.firstElementChild.textContent;
         updateNameOnNotepad(projectId, projectName);
         handlers.onProjectNameEdit(projectId, projectName);
