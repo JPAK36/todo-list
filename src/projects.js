@@ -63,6 +63,8 @@ const deleteProject = () => {
     const projectList = document.querySelector('.project-list');
     projectList.addEventListener('click', (e) => {
         if (e.target.closest('.delete-project')) {
+            const doDelete = confirm('Are you sure you want to delete this project and all its tasks? This action cannot be undone.');
+            if (!doDelete) return;
             const projectId = e.target.closest('[data-project-id]').dataset.projectId;
             const projectElements = document.querySelectorAll(`[data-project-id="${projectId}"]`);
             projectElements.forEach(element => element.remove());
