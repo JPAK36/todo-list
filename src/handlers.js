@@ -6,15 +6,7 @@ const handlers = () => {
     
     const _refreshProjectList = () => {
         const projects = updateStorage.getProjects(); // Update projects in storage        
-        _setProjectList(projects); // Update projects on DOM
-    }
-
-    const _setProjectList = (projects) => {
-        updateProjectList(projects);
-    }
-
-    const _setActiveTab = (tab) => {
-        updateActiveTab(tab);
+        updateProjectList(projects); // Update projects on DOM
     }
 
     const onHomeTabSelect = (projects, tab) => {
@@ -108,9 +100,18 @@ const handlers = () => {
 
     const onProjectSelect = (projectId) => {
         const projects = updateStorage.getProjects();
+        loadAllProjects(projects);
         const projectObject = projects.find(project => project.id == projectId);
-        const selectedProject = document.querySelector(`[data-project-id='${projectObject.id}']`);
-        _setActiveTab(selectedProject);
+        const sidebar = document.querySelector('#sidebar');
+        const selectedProject = sidebar.querySelector(`[data-project-id='${projectObject.id}']`);
+        const projectsOnNotepad = document.querySelectorAll('.project');
+
+        projectsOnNotepad.forEach(project => {
+            if (project.dataset.projectId != projectId) {
+                project.remove();
+            } 
+        });
+        updateActiveTab(selectedProject);
     }
 
     const onProjectAdd = (projectName) => {
@@ -123,7 +124,7 @@ const handlers = () => {
         // add input to page
         _refreshProjectList();
         const newProjectDOMElement = document.querySelector(`[data-project-id='${newProject.id}']`);
-        _setActiveTab(newProjectDOMElement);
+        //updateActiveTab(newProjectDOMElement);
     }
     
     const onTaskAdd = (task, id) => {
