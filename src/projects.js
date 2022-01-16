@@ -59,7 +59,8 @@ const addProject = () => {
     });
 }
 const deleteProject = () => {
-    document.addEventListener('click', (e) => {
+    const projectList = document.querySelector('.project-list');
+    projectList.addEventListener('click', (e) => {
         if (e.target.closest('.delete-project')) {
             const projectItem = e.target.closest('.project-item')
             projectItem.remove();
