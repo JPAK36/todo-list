@@ -1,6 +1,6 @@
 import { updateProjectList, updateActiveTab, addProjectToNotepad, loadTask } from "./createDOMElements";
 import updateStorage from "./storage";
-import {format} from "date-fns";
+import { isToday, parseISO } from "date-fns";
 
 const handlers = () => {
     
@@ -18,8 +18,42 @@ const handlers = () => {
     }
 
     const onHomeTabSelect = (projects, tab) => {
-        loadAllProjects(projects); // issue with loadAllProjects 
+        loadAllProjects(projects);  
         updateActiveTab(tab);
+    }
+    
+    const onTodayTabSelect = (projects, tab) => {
+        // Filter projects that have tasks due today
+        projects.forEach(project => {
+            const tasks = project.tasks;
+
+            const todaysTasks = tasks.filter(task => dueToday(task));
+            
+            // Hide project container if no tasks due today
+            if (todaysTasks.length === 0) {
+                const notepad = document.querySelector('.notepad')
+                const projectContainer = notepad.querySelector(`[data-project-id="${project.id}"]`);
+                projectContainer.remove();
+            }
+
+            // Remove tasks that are not due today from DOM
+            const notDueToday = tasks.filter(task => !dueToday(task));
+            
+            notDueToday.forEach(task => {
+                const taskContainer = document.querySelector(`[data-task-id="${task.taskId}"]`);
+                if (taskContainer) taskContainer.remove();
+            });
+        });
+
+        
+        // remove tasks that are not due today from dom
+        // remove any projects that do not have tasks due today from dom
+        //console.log(isToday(parseISO("2022-01-12")));
+        updateActiveTab(tab);
+    }
+
+    const dueToday = (task) => {
+        if (isToday(parseISO(task.dueDate))) return task;
     }
 
     const loadAllProjects = (projects) => {
@@ -136,7 +170,7 @@ const handlers = () => {
             });  
     }
 
-    return { onProjectSelect, onProjectAdd, onProjectNameEdit, onTaskAdd, onTaskNameEdit, onTaskPriorityEdit, onTaskDueDateEdit, onTaskCompleteEdit, onHomeTabSelect }
+    return { onProjectSelect, onProjectAdd, onProjectNameEdit, onTaskAdd, onTaskNameEdit, onTaskPriorityEdit, onTaskDueDateEdit, onTaskCompleteEdit, onHomeTabSelect, onTodayTabSelect }
     
 }
 

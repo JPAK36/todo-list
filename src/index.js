@@ -34,10 +34,18 @@ const sidebarController = (() => {
     });        
 
     const homeTab = sidebar.querySelector('[data-tab="home"]');
+    const todayTab = sidebar.querySelector('[data-tab="today"');
+    
     homeTab.addEventListener('click', () => {
         const projects = updateStorage.getProjects();
         handlers.onHomeTabSelect(projects, homeTab);
     });
+
+    todayTab.addEventListener('click', () => {
+        const projects = updateStorage.getProjects();
+        handlers.onTodayTabSelect(projects, todayTab);
+    });
+
 })();
 
 const projectController = (() => {
