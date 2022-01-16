@@ -1,4 +1,4 @@
-import { updateProjectList, updateActiveTab } from "./createDOMElements";
+import { updateProjectList, updateActiveTab, addProjectToNotepad, loadTask } from "./createDOMElements";
 import updateStorage from "./storage";
 import {format} from "date-fns";
 
@@ -17,7 +17,35 @@ const handlers = () => {
         updateActiveTab(tab);
     }
 
-    // Here be handlers
+    const onHomeTabSelect = (projects, tab) => {
+        loadAllProjects(projects); // issue with loadAllProjects 
+        updateActiveTab(tab);
+    }
+
+    const loadAllProjects = (projects) => {
+        clearProjectsFromDOM();
+        const notepad = document.querySelector('.notepad');
+        
+        projects.forEach(project => {
+            addProjectToNotepad(project.id);
+
+            const projectTasks = project.tasks;
+            const projectContainer = notepad.querySelector(`[data-project-id="${project.id}"]`);
+            const tasksList = projectContainer.querySelector('ul');
+            const addTaskBtn = projectContainer.querySelector('.add-task');
+            
+            projectTasks.forEach(task => {
+                const taskToAdd = loadTask(task);
+                tasksList.insertBefore(taskToAdd, addTaskBtn.parentElement);
+            });
+        });
+    }  
+    const clearProjectsFromDOM = () => {
+        const writingArea = document.querySelector('#writing-area');
+        const projects = writingArea.querySelectorAll('.project');
+        projects.forEach(project => project.remove());
+    }
+
     const onProjectSelect = (projectId) => {
         const projects = updateStorage.getProjects();
         const projectObject = projects.find(project => project.id == projectId);
@@ -108,7 +136,7 @@ const handlers = () => {
             });  
     }
 
-    return { onProjectSelect, onProjectAdd, onProjectNameEdit, onTaskAdd, onTaskNameEdit, onTaskPriorityEdit, onTaskDueDateEdit, onTaskCompleteEdit }
+    return { onProjectSelect, onProjectAdd, onProjectNameEdit, onTaskAdd, onTaskNameEdit, onTaskPriorityEdit, onTaskDueDateEdit, onTaskCompleteEdit, onHomeTabSelect }
     
 }
 

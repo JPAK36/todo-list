@@ -1,31 +1,16 @@
 import { addProject, deleteProject, editProject } from "./projects";
 import updateStorage from "./storage";
-import { updateProjectList, addProjectToNotepad, loadTask } from "./createDOMElements";
+import { updateProjectList } from "./createDOMElements";
 import { toggleTask, addTaskToDOM, addTask, updatePriority, deleteTask, editTask } from "./tasks";
+import handlers from "./handlers";
 
 // Load localStorage items on page load
 window.onload = () => {
     const projects = updateStorage.getProjects();
+    const tab = document.querySelector('[data-tab="home"]');
 
-    const loadAllProjects = () => {
-        const notepad = document.querySelector('.notepad');
-        
-        projects.forEach(project => {
-            addProjectToNotepad(project.id);
-
-            const projectTasks = project.tasks;
-            const projectContainer = notepad.querySelector(`[data-project-id="${project.id}"]`);
-            const tasksList = projectContainer.querySelector('ul');
-            const addTaskBtn = projectContainer.querySelector('.add-task');
-            
-            projectTasks.forEach(task => {
-                const taskToAdd = loadTask(task);
-                tasksList.insertBefore(taskToAdd, addTaskBtn.parentElement);
-            });
-        });
-    }  
     updateProjectList(projects);
-    loadAllProjects(projects);
+    handlers.onHomeTabSelect(projects, tab);
 }
 
 // Sidebar Module
@@ -47,6 +32,12 @@ const sidebarController = (() => {
     toggleBtn.forEach(button => {
         button.addEventListener('click', toggleSidebar);
     });        
+
+    const homeTab = sidebar.querySelector('[data-tab="home"]');
+    homeTab.addEventListener('click', () => {
+        const projects = updateStorage.getProjects();
+        handlers.onHomeTabSelect(projects, homeTab);
+    });
 })();
 
 const projectController = (() => {

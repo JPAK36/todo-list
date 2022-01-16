@@ -84,13 +84,10 @@ const addProjectToSidebar = () => {
 
 const addProjectToNotepad = (projectId) => {
     const view = createElements();
-    //const projectList = document.querySelector('.project-list');
 
     const projects = updateStorage.getProjects();
     const projectToAdd = projects.find(project => project.id == projectId);
     const projectName = projectToAdd.projectName;
-    //const currentProjectNumber = projectList.childElementCount - 2;
-    //const projectName = projectList.children[currentProjectNumber].textContent;
 
     const notepad = document.querySelector('#writing-area');
     const projectDiv = view.createDiv('project');
@@ -209,23 +206,6 @@ const loadTask =  (taskObj) => {
     
     const dateInput = dueDateSpan.querySelector('input');
     dateInput.value = taskObj.dueDate;
-    /*
-    const dueDateSpan = view.createSpanElement('due-date');
-    const priorityIcon = view.createImageElement('images/priority-icon.svg', 'priority-icon');
-    priorityIcon.classList.add(`priority-${taskObj.priority}`);
-    
-    
-    const dateLabel = document.createElement('label');
-    dateLabel.classList.add('date-label');
-  
-    const dateInput = document.createElement('input');
-    dateInput.setAttribute('type', 'date');
-    dateInput.required = true;
-    dateInput.value = taskObj.dueDate;
-   
-    const calendarIcon = view.createImageElement('images/calendar-icon.svg', 'calendar-icon');
-    dateLabel.append(dateInput, calendarIcon);
-    dueDateSpan.append(priorityIcon, dateLabel);*/
   
     if (taskObj.isComplete) task.classList.add('completed');
 
