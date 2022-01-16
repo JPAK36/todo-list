@@ -1,6 +1,6 @@
 import { addProject, deleteProject, editProject } from "./projects";
 import updateStorage from "./storage";
-import { updateProjectList, addProjectToNotepad } from "./createDOMElements";
+import { updateProjectList, addProjectToNotepad, loadTask } from "./createDOMElements";
 import { toggleTask, addTaskToDOM, addTask, updatePriority } from "./tasks";
 
 // Load localStorage items on page load
@@ -8,11 +8,29 @@ window.onload = () => {
     const projects = updateStorage.getProjects();
 
     const loadAllProjects = () => {
+        const notepad = document.querySelector('.notepad');
+        
         projects.forEach(project => {
             addProjectToNotepad(project.id);
+
+            const projectTasks = project.tasks;
+            const projectContainer = notepad.querySelector(`[data-project-id="${project.id}"]`);
+            const tasksList = projectContainer.querySelector('ul');
+            const addTaskBtn = projectContainer.querySelector('.add-task');
+            
+            projectTasks.forEach(task => {
+                const taskToAdd = loadTask(task);
+                tasksList.insertBefore(taskToAdd, addTaskBtn.parentElement);
+            });
         });
     }  
-    
+
+    const loadAllTasks = (allTasks) => {
+            allTasks.forEach(task => {
+                loadTask(task);
+            });
+    }
+
     updateProjectList(projects);
     loadAllProjects(projects);
 }

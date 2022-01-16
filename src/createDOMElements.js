@@ -120,6 +120,36 @@ const addProjectToNotepad = (projectId) => {
     notepad.append(projectDiv);
 }
 
+const addDueDateToDOM = () => {
+    const dueDateSpan = createElements().createSpanElement('due-date');
+
+    const priorityIcon = createElements().createImageElement('images/priority-icon.svg', 'priority-icon')
+    priorityIcon.classList.add('priority-low');
+    
+    const dateLabel = document.createElement('label');
+    dateLabel.classList.add('date-label');
+    
+    const dateInput = document.createElement('input');
+    dateInput.setAttribute('type', 'date');
+    dateInput.required = true;
+
+    const calendarIcon = createElements().createImageElement('images/calendar-icon.svg', 'calendar-icon');
+
+    dateLabel.append(dateInput, calendarIcon);
+    dueDateSpan.append(priorityIcon, dateLabel);
+    
+    // update localStorage on due date change
+    dateInput.addEventListener('change', () => {
+        const projectId = dateInput.closest('.project').dataset.projectId;
+        const taskId = dateInput.closest('[data-task-id]').dataset.taskId;
+        const newDueDate = dateInput.value;
+
+        return handlers.onTaskDueDateEdit(projectId, taskId, newDueDate);
+    });
+
+    return dueDateSpan;
+}
+
 // creates HTML for project items in sidebar from localStorage item
 const _createProjectItemHTML = (id, name) => {
     const view = createElements();
@@ -158,6 +188,52 @@ const updateProjectList = (projects) => {
     });
 }
 
+const loadTask =  (taskObj) => {
+    const view = createElements();
+
+    const task = view.createListElement('task');
+    task.setAttribute('data-task-id', taskObj.taskId);
+
+    const taskItem = view.createSpanElement('task-item');
+    
+    const taskNameSpan = view.createSpanElement('task-text');
+    taskNameSpan.textContent = taskObj.item;
+    
+    const iconSpan = createIconSpan();
+    taskItem.append(taskNameSpan, iconSpan);
+   
+    const dueDateSpan = addDueDateToDOM();
+
+    const priorityIcon = dueDateSpan.querySelector('.priority-icon');
+    priorityIcon.classList.add(`priority-${taskObj.priority}`);
+    
+    const dateInput = dueDateSpan.querySelector('input');
+    dateInput.value = taskObj.dueDate;
+    /*
+    const dueDateSpan = view.createSpanElement('due-date');
+    const priorityIcon = view.createImageElement('images/priority-icon.svg', 'priority-icon');
+    priorityIcon.classList.add(`priority-${taskObj.priority}`);
+    
+    
+    const dateLabel = document.createElement('label');
+    dateLabel.classList.add('date-label');
+  
+    const dateInput = document.createElement('input');
+    dateInput.setAttribute('type', 'date');
+    dateInput.required = true;
+    dateInput.value = taskObj.dueDate;
+   
+    const calendarIcon = view.createImageElement('images/calendar-icon.svg', 'calendar-icon');
+    dateLabel.append(dateInput, calendarIcon);
+    dueDateSpan.append(priorityIcon, dateLabel);*/
+  
+    if (taskObj.isComplete) task.classList.add('completed');
+
+    task.append(taskItem, dueDateSpan);
+
+    return task;
+}
+
 const updateActiveTab = (tab) => {
     // for all other projects, change display to none, to bring back set display to contents  
         // item.style.display = 'none'
@@ -169,4 +245,4 @@ const updateActiveTab = (tab) => {
     //console.log(projectNameSpan);
 }
 
-export { addProjectToSidebar, addProjectToNotepad, createElements, updateProjectList, updateActiveTab };
+export { addProjectToSidebar, addProjectToNotepad, addDueDateToDOM, createElements, updateProjectList, updateActiveTab, loadTask };

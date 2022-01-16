@@ -1,4 +1,4 @@
-import {createElements} from "./createDOMElements";
+import {createElements, addDueDateToDOM} from "./createDOMElements";
 import {format} from "date-fns";
 import handlers from "./handlers";
 import updateStorage from "./storage";
@@ -72,38 +72,6 @@ const addTaskToDOM = (addTaskBtn) => {
 
     return taskSpan;
 }
-
-const addDueDateToDOM = () => {
-    const dueDateSpan = createElements().createSpanElement('due-date');
-
-    const priorityIcon = createElements().createImageElement('images/priority-icon.svg', 'priority-icon')
-    priorityIcon.classList.add('priority-low');
-    
-    const dateLabel = document.createElement('label');
-    dateLabel.classList.add('date-label');
-    
-    const dateInput = document.createElement('input');
-    dateInput.setAttribute('type', 'date');
-    dateInput.required = true;
-
-    const calendarIcon = createElements().createImageElement('images/calendar-icon.svg', 'calendar-icon');
-
-    dateLabel.append(dateInput, calendarIcon);
-    dueDateSpan.append(priorityIcon, dateLabel);
-    
-    // update localStorage on due date change
-    dateInput.addEventListener('change', () => {
-        const projectId = dateInput.closest(['.project']).dataset.projectId;
-        const taskId = dateInput.closest('[data-task-id').dataset.taskId;
-        const newDueDate = dateInput.value;
-
-        return handlers.onTaskDueDateEdit(projectId, taskId, newDueDate);
-    });
-
-    return dueDateSpan;
-}
-
-
 
 const addTask = () => {
     const inputField = document.querySelector('#user-input');
