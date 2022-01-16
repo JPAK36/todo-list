@@ -24,13 +24,6 @@ window.onload = () => {
             });
         });
     }  
-
-    const loadAllTasks = (allTasks) => {
-            allTasks.forEach(task => {
-                loadTask(task);
-            });
-    }
-
     updateProjectList(projects);
     loadAllProjects(projects);
 }
@@ -60,8 +53,9 @@ const projectController = (() => {
     deleteProject();
     const addProjectBtn = document.querySelector('[data-add-project]');
     addProjectBtn.addEventListener('click', addProject);
+    const projectList = document.querySelector('.project-list');
 
-    document.addEventListener('click', (e) => {
+    projectList.addEventListener('click', (e) => {
         if (e.target.classList.contains('edit-project')) {
             editProject(e);
         }
