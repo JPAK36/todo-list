@@ -165,7 +165,7 @@ hr {
     cursor: pointer;
     visibility: visible;
     transition: transform 200ms;
-    transform: scale(1.03);
+    transform: scale(1.02);
 }
 
 .active {
@@ -197,7 +197,7 @@ hr {
 
 .paper {
     background: repeating-linear-gradient(#f0ec6a, #f6f9b8 41px, #c4c5aa 41px, #91b0c7 42px);
-    line-height: 41px;
+    line-height: 42px;
     outline: 0;
     font-family: "Gochi Hand";
     word-spacing: 10px;
@@ -272,12 +272,18 @@ h3 {
 .task {
     display: flex;
     box-sizing: border-box;
-
+    max-height: 42px;
 }
 
 .task-item {
     width: 100%;
+    box-sizing: border-box;
+    max-height: 42px;
     display: flex;
+}
+
+.task-text {
+    max-height: 42px;
 }
 
 .priority-icon {
@@ -285,7 +291,7 @@ h3 {
     height: 24px;
     position: relative;
     margin-right: 7px;
-    top: 8px;
+    top: 10px;
 }
 
 .priority-low {
@@ -307,7 +313,7 @@ h3 {
     width: 24px;
     height: 24px;
     position: relative;
-    top: 8px;
+    top: 10px;
 }
 
 .calendar-icon:hover, .priority-icon:hover {
@@ -325,7 +331,7 @@ h3 {
 input[type="date"] {
     border: none;
     cursor: pointer;
-    line-height: 41px;
+    line-height: 42px;
     background: transparent;
     font-family: "Gochi Hand";
     font-size: 24px;
