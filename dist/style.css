@@ -271,19 +271,11 @@ h3 {
 
 .task {
     display: flex;
-    box-sizing: border-box;
-    max-height: 42px;
 }
 
 .task-item {
     width: 100%;
-    box-sizing: border-box;
-    max-height: 42px;
     display: flex;
-}
-
-.task-text {
-    max-height: 42px;
 }
 
 .priority-icon {

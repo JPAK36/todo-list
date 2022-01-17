@@ -123,6 +123,15 @@ const validateUserInput = () => {
     else if (userInput == '' && taskContainer.dataset.taskId) return;
     inputForm.remove();
     taskItem.prepend(taskTextSpan);
+    
+    adjustElementHeight(taskTextSpan, taskContainer);
+}
+// Adjust element height to line up with notepad lines
+const adjustElementHeight = (taskTextSpan, taskContainer) => {
+    const heightFactor = Math.round(taskContainer.offsetHeight / 42);
+    const newHeight = heightFactor * 42;
+    taskTextSpan.style.height = `${newHeight}px`;
+    taskContainer.style.height = `${newHeight}px`;
 }
 
 const updatePriority = (eventTarget) => {
@@ -156,5 +165,6 @@ export {
     addTask,
     updatePriority,
     deleteTask,
-    editTask
+    editTask,
+    adjustElementHeight
 }
