@@ -8,30 +8,7 @@ import handlers from "./handlers";
 window.onload = () => {
     const projects = updateStorage.getProjects();
     const tab = document.querySelector('[data-tab="home"]');
-
-    // TODO : THIS WORKS BUT LOOK INTO ResizeObserver BECAUSE IT BREAKS WHEN ADJUSTING SCREEN SIZE
-    const observer = new MutationObserver(entries => {
-        entries.forEach(entry  => {
-            if (entry.addedNodes.length) {
-                const taskContainers = document.querySelectorAll('.task');
-                
-                taskContainers.forEach(container => {
-                    if (container.querySelector('.add-task')) {
-                        const taskTextSpan = container.querySelector('.add-task');
-                        adjustElementHeight(container, taskTextSpan);
-                    } else {
-                        const taskTextSpan = container.querySelector('.task-text');
-                        adjustElementHeight(container, taskTextSpan);
-                    }
-                });
-            } 
-        });
-    });
-    const writingArea = document.querySelector('#writing-area');
-    const mutationConfig = { childList: true };
-    
-    observer.observe(writingArea, mutationConfig);
-
+   
     updateProjectList(projects);
     handlers.onHomeTabSelect(projects, tab);
 }

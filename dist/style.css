@@ -45,6 +45,7 @@ body {
 
 #sidebar {
     position: relative;
+    min-width: 350px;
     width: 450px;
     background: #f7f2cb; 
     border-right: 1px solid black;
@@ -265,17 +266,24 @@ h3 {
     justify-content: space-between;
     align-items: center;
     margin-top: 0px;
+    margin-bottom: 0px;
     margin-right: 4%;
     height: 42px;
 }
 
 .task {
     display: flex;
+    line-height: 42px;
 }
 
 .task-item {
     width: 100%;
     display: flex;
+    line-height: 42px;
+}
+
+.task-text {
+    line-height: 42px;
 }
 
 .priority-icon {
@@ -327,6 +335,7 @@ input[type="date"] {
     background: transparent;
     font-family: "Gochi Hand";
     font-size: 24px;
+    padding: 0;
 }
 
 input[type="date"]:focus {
