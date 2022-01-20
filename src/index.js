@@ -17,12 +17,20 @@ window.onload = () => {
 const sidebarController = (() => {
 
     const mobileToggleBtn = document.getElementById('bars-icon-mobile');
+    const sidebar = document.getElementById('sidebar');
+
     if (window.innerWidth <= 1024 && mobileToggleBtn.classList.contains('hidden')) {
         mobileToggleBtn.classList.toggle('hidden');
     }
-
-    const sidebar = document.getElementById('sidebar');
     
+    window.addEventListener('resize', () => {
+        if (sidebar.classList.contains('toggle-sidebar')) return;
+         
+        if (window.innerWidth <= 1024 && mobileToggleBtn.classList.contains('hidden')) {
+            mobileToggleBtn.classList.toggle('hidden');
+        }
+    });
+
     const toggleSidebar = () => {
         sidebar.classList.toggle('toggle-sidebar');
         if (window.innerWidth <= 1024) mobileToggleBtn.classList.toggle('hidden');
