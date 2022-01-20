@@ -25,8 +25,6 @@ const updateStorage = () => {
         }
         else {
             projectToSave.id = Math.floor(Math.random() * 1000000);
-            // Add projectName
-            // Add Tasks array containing another array which includes task, priority, dueDate, and true/false for completed or not
             projects.push(projectToSave);
         }
 
@@ -69,7 +67,7 @@ const updateStorage = () => {
         const projects = getProjects();
         const projectWithTask = projects.find(project => project.id == id);
         const allTasks = projectWithTask.tasks;
-        // Each task is an object
+        
         const updatedTaskObj = allTasks.filter(taskObj => taskObj.taskId != taskId);
         projectWithTask.tasks = updatedTaskObj;
 

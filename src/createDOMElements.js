@@ -177,7 +177,6 @@ const updateProjectList = (projects) => {
         projectsListContainer.insertBefore(html, addProjectBtn);
     }
 
-    // Add listeners for edit, delete ????
     projectsListContainer.querySelectorAll('.project-item').forEach(projectItem => {
         projectItem.addEventListener('click', (e) => {
             const userInput = document.querySelector('#user-input');
@@ -217,14 +216,10 @@ const loadTask =  (taskObj) => {
 }
 
 const updateActiveTab = (tab) => {
-    // for all other projects, change display to none, to bring back set display to contents  
-        // item.style.display = 'none'
-    // remove active class from any other sidebar element
     const currentActiveTab = document.querySelector('.active');
     if (currentActiveTab) currentActiveTab.classList.remove('active');
     tab.classList.add('active');
-    const projectNameSpan = tab.children.item(0); // Update notepad here?
-    //console.log(projectNameSpan);
+    const projectNameSpan = tab.children.item(0);
 }
 
 export { addProjectToSidebar, addProjectToNotepad, addDueDateToDOM, createElements, updateProjectList, updateActiveTab, loadTask };

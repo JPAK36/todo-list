@@ -40,10 +40,7 @@ const addTaskToDOM = (addTaskBtn) => {
 
     container.insertBefore(taskListElement, container.children[numberOfTasks]);
     
-    // What is this???
-    setTimeout(() => {
-        inputField.focus();
-    }, 0);
+    inputField.focus();
 
     return taskSpan;
 }
