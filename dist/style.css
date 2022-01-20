@@ -284,6 +284,7 @@ h3 {
 
 .task-text {
     line-height: 42px;
+    word-break: break-all;
 }
 
 .priority-icon {
